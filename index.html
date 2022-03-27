@@ -7,7 +7,7 @@
   <meta charset='utf-8'>
 
   <!-- Title -->
-  <title>G##: Topic, DS 4200 S22</title>
+  <title>G01: Rising Sea Levels, DS 4200 S22</title>
 
   <!-- CSS Styling -->
   <link rel='stylesheet' href='style.css'>
@@ -32,7 +32,7 @@
 
   <!-- Writeup -->
   <div class='content-column'>
-    <h1>Project Group ##: Topic, DS 4200 S22</h1>
+    <h1>Project G01: Rising Sea Levels, DS 4200 S22</h1>
 
     <p><strong>Mira Chadha</strong>, <strong>Michelle Lo</strong>, <strong>Annetta Stogniew</strong></p>
 
@@ -70,36 +70,77 @@
     </p>
 
 
-    <h1>Visualization</h1>
+    <h1>Storyboard</h1>
 
-    <p>Include the interactive visualization as part of this page. Static example follows.</p>
+    <p>Our storyboard follows.</p>
 
 
   </div>
 
-  <!-- Visualization goes here -->
-  <div class='vis-holder'>
-    <!-- Change viewbox to whatever you want, e.g., '0 0 1000 6000' This determines your aspect ratio and coordinate system -->
-    <!-- Delete all the sample SVG code below after the viewbox to before the closing tag. Populate this part of the SVG with D3. -->
-    <svg id='vis-svg-1' preserveAspectRatio='xMidYMid meet' class='vis-svg' viewBox='0 0 1000 1000' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
-
-
-      <text x='30%' y='35%' text-anchor='middle'>A</text>
-      <text x='70%' y='35%' text-anchor='middle'>B</text>
-      <rect x='20%' y='40%' width='20%' height='20%' fill='yellow'></rect>
-      <circle cx='70%' cy='50%' r='10%' fill='blue'></circle>
-
-
-      <!-- Don't delete the closing tag! -->
-    </svg>
+  <!-- Storyboard goes here -->
+  <div>
+    <div class='storyboard-section'>
+      <container class='centered-container'>
+        <h1 class='storyboard-h1'>RISING SEA LEVELS</h1>
+      </container>
+    </div>
+    <div class='storyboard-section'>
+        <div class='intro-text'>
+          <p>Intro text</p>
+        </div>
+        <div class='intro-vis-holder'>
+          <svg id='vis-svg-1' class='svg-1'>
+          </svg>
+          <svg id='vis-svg-2' class='svg-1'>
+          </svg>
+        </div>
+    </div>
+    <div class='storyboard-section'>
+      <container class='centered-container'>
+        <div>
+          <h2 class='storyboard-h2'>Which trend would you like to explore?</h2>
+          <div class='button-holder'>
+            <button class='question-button'>Precipitation</button>
+            <button class='question-button'>Flooding</button>
+          </div>
+        </div>
+      </container>
+    </div>
+    <div class='storyboard-section'>
+      <div>
+        <h2 class='storyboard-h2'>Flooding</h2>
+        <p>Filler text</p>
+      </div>
+    </div>
+    <div class='storyboard-section'>
+      <div class='vis-section'>
+        <div class='vis-holder'>
+          <!-- Change viewbox to whatever you want, e.g., '0 0 1000 6000' This determines your aspect ratio and coordinate system -->
+          <svg id='vis-svg-3' preserveAspectRatio='xMidYMid meet' class='svg-2' viewBox='0 0 1000 1000' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
+          </svg>
+        </div>
+        <div class='vis-caption'>
+          <h3 class='storyboard-h3'>1920-1990</h3>
+          <p>Caption</p>
+          <button class='next-button'>Next</button>
+        </div>
+      </div>
+    </div>
+    <div class='storyboard-section'>
+      <container class='centered-container'>
+          <h2 class='storyboard-h2'>What do you think the future will look like?</h2>
+      </container>
+    </div>
+    <div class='storyboard-section'>
+      <container class='centered-container'>
+          <svg id='vis-svg-6' class='svg-3'>
+          </svg>
+      </container>
+    </div>
   </div>
 
   <!-- Further writeup -->
   <div class='content-column'>
-
-    <h1>Visualization explanation</h1>
-
-    <p>Replace with a brief explanation and linked presentation slides.</p>
 
     <h1>Demo Video</h1>
 
