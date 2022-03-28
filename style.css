@@ -48,6 +48,12 @@ h1, h2, h3 {
 	height: 100%;
 }
 
+.small-text-section {
+  width: 75%;
+	padding: 10px 0;
+	margin: auto;
+}
+
 .vis-section {
 	display: flex;
 }
