@@ -119,13 +119,6 @@ h1, h2, h3 {
   display: flex;
 }
 
-.svg-1 {
-	background-color: #f4f1f0;
-	height: 48vh;
-  width: 32vw;
-	color: black;
-}
-
 .svg-2 {
 	background-color: #f4f1f0;
 	height: 90vh;
@@ -133,12 +126,14 @@ h1, h2, h3 {
 	color: black;
 }
 
-.svg-3 {
-	background-color: #f4f1f0;
+.vis-img {
+	height: 48vh;
+  width: 32vw;
+}
+
+.vis-img-2 {
 	height: 75vh;
 	width: 75%;
-	margin: auto;
-	color: black;
 }
 
 .vis-caption {
