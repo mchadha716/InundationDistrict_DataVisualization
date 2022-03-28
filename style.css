@@ -3,7 +3,7 @@ body {
 	padding: 0 10px;
   font-size: 18px;
   font-family: Arial;
-  background-color: #202020;
+  background-color: #161616;
   color: white;
 }
 
@@ -82,7 +82,7 @@ h1, h2, h3 {
 	width: 300px;
 	height: 80px;
 	border: none;
-	color: #202020;
+	color: #161616;
 	background: white;
 	font-size: 30px;
 	margin-top: 40px;
@@ -93,7 +93,7 @@ h1, h2, h3 {
 	width: 80px;
 	height: 45px;
 	border: none;
-	color: #202020;
+	color: #161616;
 	background: white;
 	font-size: 18px;
 	float: right;
@@ -126,14 +126,16 @@ h1, h2, h3 {
 	color: black;
 }
 
+.svg-3 {
+	background-color: #f4f1f0;
+	height: 75vh;
+	width: 75%;
+	color: black;
+}
+
 .vis-img {
 	height: 48vh;
   width: 32vw;
-}
-
-.vis-img-2 {
-	height: 75vh;
-	width: 75%;
 }
 
 .vis-caption {

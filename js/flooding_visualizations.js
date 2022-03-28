@@ -113,7 +113,7 @@ const setNextButtonClicked = state => {
   nextButtonClicked = state;
 }
 
-
+// makes paths look like they're drawn on the page
 const pathTransition = (pathId, transition, remove) => {
   // select path by id
   const path = d3.select(pathId);
