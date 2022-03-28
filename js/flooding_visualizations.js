@@ -103,16 +103,6 @@ svg.append("text")
   .attr("alignment-baseline","middle")
   .attr('id', 'natLabel');
 
-// global variable to store state of next button
-// allows each click of the next button to trigger a different transition
-// (see updateChart())
-let nextButtonClicked = false;
-
-// function to set nextButtonClicked, even within another function
-const setNextButtonClicked = state => {
-  nextButtonClicked = state;
-}
-
 // makes paths look like they're drawn on the page
 const pathTransition = (pathId, transition, remove) => {
   // select path by id
@@ -232,9 +222,6 @@ const chartExtension = () => {
       pathTransition('#national2', null, false);
     }
   )
-  // set nextButtonClicked true to trigger next transition 
-  // if next button is clicked again
-  setNextButtonClicked(true);
 }
 
 // function to remove first visualization before showing next one
@@ -360,22 +347,45 @@ const drawNewChart = () => {
   )
 }
 
-// function to transition from first to second visualization
-const transitionToNewChart = () => {
+// function for first click of next button
+const firstClick = () => {
+  // extend line chart
+  chartExtension();
+
+  // change slides (caption)
+  document.getElementById('flood-slide-1').className = 'hidden-slide';
+  document.getElementById('flood-slide-2').className = '';
+}
+
+// function for second click of next button
+const secondClick = () => {
   // remove current visualization
   removeLineChart();
 
   // draw new chart
   drawNewChart();
+
+  // change slides (caption)
+  document.getElementById('flood-slide-2').className = 'hidden-slide';
+  document.getElementById('flood-slide-3').className = '';
 }
+
+// function for third click of next button
+const thirdClick = () => {
+  // scroll to next section
+  document.getElementById('future-section').scrollIntoView();
+}
+
+// variable to hold number of clicks on Next button
+let clicks = 0;
 
 // function to update charts as a result of next button click
 const updateChart = () => {
-  // if next button has not yet been clicked, transition 
-  // between phases of first visualization
-  // if next button has been clicked, transition
-  // to second visualization
-  nextButtonClicked ? transitionToNewChart() : chartExtension();
+  // respond to click with appropriate action
+  clicks++;
+  clicks == 1 && firstClick();
+  clicks == 2 && secondClick();
+  clicks == 3 && thirdClick();
 }
 
 // call drawChart() on first render

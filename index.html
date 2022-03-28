@@ -45,7 +45,6 @@
 
 
     <h1>Abstract</h1>
-
     <p>
       This project will consist of data visualizations about rising sea levels. The graphics will 
       show how flooding is increasing, how sea levels are rising, and how vulnerable various 
@@ -54,7 +53,6 @@
       will be used in an upcoming documentary film about how rising sea levels will affect Boston, 
       particularly its Seaport neighborhood.
     </p>
-
     <p>
       Rising sea levels are being caused by rapidly melting ice caps and rising global average 
       temperatures. As climate change stands now, these sea levels will “wreak havoc on coastal 
@@ -67,7 +65,6 @@
       on the effect of rising sea levels in Boston. These data visualizations are planned to appear 
       in an upcoming documentary film.
     </p>
-
     <p>
       We got approval from Cody to exclude interactivity from our visualizations, substituted by 
       extra storytelling elements. Therefore, rather than the typical site set up, we have included 
@@ -93,9 +90,10 @@
         <h1 class='storyboard-h1'>RISING SEA LEVELS</h1>
       </div>
     </div>
-    <div class='storyboard-section'>
+    <div class='small-text-section'>
         <div class='intro-text'>
-          <p>The oceans are rising: greenhouse gases, melting glaciers, and thermal expansion have
+          <p>
+            The oceans are rising: greenhouse gases, melting glaciers, and thermal expansion have
             and will continue to devastate infrastructure and coastal habitats. As climate change
             stands now, these sea levels will "wreak havoc on coastal cities across the world." 
             One city in particular that will face these changes is Boston. Though it already
@@ -118,22 +116,22 @@
           <h2 class='storyboard-h2'>Which trend would you like to explore?</h2>
           <div class='button-holder'>
             <button class='question-button'>Precipitation</button>
-            <button class='question-button'>Flooding</button>
+            <button class='question-button' onClick="document.getElementById('flooding-text').scrollIntoView();">Flooding</button>
           </div>
         </div>
       </div>
     </div>
-    <div class='small-text-section'>
+    <div class='small-text-section' id="flooding-text">
       <div>
         <h2 class='storyboard-h2'>Flooding</h2>
-        <p>Floods are among the most common natural disasters in the United States. They devastate 
+        <p>
+          Floods are among the most common natural disasters in the United States. They devastate 
           lives, natural habitats and city infrastructure alike, and they are on a continuously 
           upward trend. Global warming continues to exacerbate rises in sea level, and has been 
           noted by the Intergovernmental Panel on Climate Change to “detectably influence” many 
           variables that play a part in flooding. 
-          </p>
-
-          <p>
+        </p>
+        <p>
           Projections currently show that cities along coastlines could experience over ten feet of 
           sea level rise within a century. The vast loss of lives and property damage that such 
           flooding has the potential to cause is indisputable. Indeed, Boston’s Seaport district 
@@ -149,24 +147,41 @@
           </svg>
         </div>
         <div class='vis-caption'>
-          <h3 class='storyboard-h3'>1920-1990</h3>
-          <p>The seventy years between 1920 and 1990 showed a steady increase in the national
-            average number of high-tide flooding days. Boston in particular experienced a larger
-            increase in such flood days, with its peak occurring during the 1970s, at 35 days 
-            compared to the national average of 8.4 days. Such an increase was certainly an early 
-            indication of the drastically negative effects that climate change poses to a coastal 
-            city.
-          </p>
+          <div id='flood-slide-1' >
+            <h3 class='storyboard-h3'>1920-1990</h3>
+            <p>The seventy years between 1920 and 1990 showed a steady increase in the national
+              average number of high-tide flooding days. Boston in particular experienced a larger
+              increase in such flood days, with its peak occurring during the 1970s, at 35 days 
+              compared to the national average of 8.4 days. Such an increase was certainly an early 
+              indication of the drastically negative effects that climate change poses to a coastal 
+              city.
+            </p>
+          </div>
+          <div id='flood-slide-2' class='hidden-slide'>
+            <h3 class='storyboard-h3'>1990-2010</h3>
+            <p>
+              Caption
+            </p>
+          </div>
+          <div id='flood-slide-3' class='hidden-slide'>
+            <h3 class='storyboard-h3'>2000-2050</h3>
+            <p>
+              Caption
+            </p>
+          </div>
           <button class='next-button' onclick='updateChart()'>Next</button>
         </div>
       </div>
     </div>
-    <div class='storyboard-section'>
+    <div class='storyboard-section' id='future-section'>
       <div class='centered-section'>
+        <div class="centered-text">
           <h2 class='storyboard-h2'>What do you think the future will look like?</h2>
+          <a href="#future-chart" class="storyboard-h2">Let's see</a>
+        </div>
       </div>
     </div>
-    <div class='storyboard-section'>
+    <div class='storyboard-section' id="future-chart">
       <div class='centered-section'>
         <svg id='vis-svg-5' preserveAspectRatio='xMidYMid meet' class='svg-3' viewBox='0 0 1000 1000' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
         </svg>

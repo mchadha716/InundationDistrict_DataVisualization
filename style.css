@@ -8,11 +8,11 @@ body {
 }
 
 a:link {
-  color: #0096FF;
+  color: white;
 }
 
 a:visited {
-  color: #BF40BF;
+  color: rgb(199, 197, 197);
 }
 
 h1, h2, h3 {
@@ -48,6 +48,10 @@ h1, h2, h3 {
 	height: 100%;
 }
 
+.centered-text {
+	text-align: center;
+}
+
 .small-text-section {
   width: 75%;
 	padding: 10px 0;
@@ -60,6 +64,7 @@ h1, h2, h3 {
 
 .intro-text {
 	height: 45%;
+	margin-bottom: 40px;
 }
 
 .intro-vis-holder {
@@ -118,7 +123,6 @@ h1, h2, h3 {
 	align-items: center;
 }
 
-/* But your visualization should be full-width and full-height */
 .vis-holder {
   width: 50%;
   height: 100%;
@@ -150,7 +154,9 @@ h1, h2, h3 {
 	padding: 0 15px;
 }
 
-
+.hidden-slide {
+	display: none;
+}
 
 /* Fork on GitHub ribbon via https://codepo8.github.io/css-fork-on-github-ribbon/# */  
 #forkongithub a{
