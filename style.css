@@ -123,12 +123,14 @@ h1, h2, h3 {
 	background-color: #f4f1f0;
 	height: 48vh;
   width: 32vw;
+	color: black;
 }
 
 .svg-2 {
 	background-color: #f4f1f0;
 	height: 90vh;
 	width: 100%;
+	color: black;
 }
 
 .svg-3 {
@@ -136,6 +138,7 @@ h1, h2, h3 {
 	height: 75vh;
 	width: 75%;
 	margin: auto;
+	color: black;
 }
 
 .vis-caption {
