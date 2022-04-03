@@ -31,6 +31,7 @@ const showFlooding = () => {
   document.getElementById('flooding-text').className = 'small-text-section';
   document.getElementById('flooding-content').className = 'storyboard-section';
   document.getElementById('flooding-text').scrollIntoView();
+  drawChart();
   setPrecipitation(false);
   setClicks(0);
 }
@@ -113,13 +114,13 @@ svg.append("circle")
   .attr("cx",745)
   .attr("cy",30)
   .attr("r", 6)
-  .style("fill", "red")
+  .style("fill", "#ff6961")
   .attr('id', 'bostonCirc');
 svg.append("circle")
   .attr("cx",745)
   .attr("cy",55)
   .attr("r", 6)
-  .style("fill", "#0096FF")
+  .style("fill", "#17BEBB")
   .attr('id', 'natCirc');
 svg.append("text")
   .attr("x", 755)
@@ -186,7 +187,7 @@ const drawChart = () => {
       svg.append("path")
         .datum(data)
         .attr("fill", "none")
-        .attr("stroke", "red")
+        .attr("stroke", "#ff6961")
         .attr("stroke-width", 2.5)
         .attr("d", d3.line()
           .x(function(d) { return x(d.decade) })
@@ -198,7 +199,7 @@ const drawChart = () => {
       svg.append("path")
         .datum(data)
         .attr("fill", "none")
-        .attr("stroke", '#0096FF')
+        .attr("stroke", '#17BEBB')
         .attr("stroke-width", 2.5)
         .attr("d", d3.line()
         .x(function(d) {return x(d.decade)})
@@ -230,7 +231,7 @@ const chartExtension = () => {
       svg.append("path")
         .datum(data)
         .attr("fill", "none")
-        .attr("stroke", "red")
+        .attr("stroke", "#ff6961")
         .attr("stroke-width", 2.5)
         .attr("d", d3.line()
         .x(function(d) { return x(d.decade) })
@@ -242,7 +243,7 @@ const chartExtension = () => {
       svg.append("path")
         .datum(data)
         .attr("fill", "none")
-        .attr("stroke", '#0096FF')
+        .attr("stroke", '#17BEBB')
         .attr("stroke-width", 2.5)
         .attr("d", d3.line()
         .x(function(d) {return x(d.decade)})
@@ -359,7 +360,7 @@ const drawNewChart = () => {
       svg.append("path")
         .datum(data)
         .attr("fill", "none")
-        .attr("stroke", 'red')
+        .attr("stroke", '#ff6961')
         .attr("stroke-width", 2.5)
         .attr("d", d3.line()
           .x(function(d) {return x(d.year)})
@@ -443,5 +444,5 @@ const updateChart = () => {
 }
 
 // call drawChart() on first render
-drawChart();
+//drawChart();
 

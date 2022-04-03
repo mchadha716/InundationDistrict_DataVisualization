@@ -30,7 +30,7 @@
   <!-- Update this with your GitHub repo URL -->
   <span id='forkongithub'><a href='https://github.com/NEU-DS-4200-S22-Students/project-g01-risingsealevels'>Fork me on GitHub</a></span>
 
-  <!-- Writeup -->
+  <!--
   <div class='content-column'>
     <h1>Project G01: Rising Sea Levels, DS 4200 S22</h1>
 
@@ -82,10 +82,11 @@
 
 
   </div>
+  -->
 
   <!-- Storyboard goes here -->
   <div>
-    <div class='storyboard-section'>
+    <div class='title-card'>
       <div class='centered-section'>
         <h1 class='storyboard-h1'>RISING SEA LEVELS</h1>
       </div>
@@ -215,7 +216,7 @@
       <div class='centered-section'>
         <div class="centered-text">
           <h2 class='storyboard-h2'>What do you think the future will look like?</h2>
-          <a href="#future-chart" class="storyboard-h2">Let's see</a>
+          <a href='#future-chart' onclick='showFuture()' class="storyboard-h2">Let's see</a>
         </div>
       </div>
     </div>
@@ -264,8 +265,7 @@
 
   <!-- Scripts at the end avoid need for dealing with async, defer, or onload event handlers -->
   <script src='lib/d3.v7.3.0/d3.js'></script>
-  <script src='js/precipitation_visualizations.js'></script>
-  <script src='js/flooding_visualizations.js'></script>
+  <script src='js/story_visualizations.js'></script>
   <script src='js/sea_level_visualization.js'></script>
 </body>
 

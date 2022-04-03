@@ -102,13 +102,13 @@ const drawFloodChart = () => {
         .attr("cx",745)
         .attr("cy",30)
         .attr("r", 6)
-        .style("fill", "red")
+        .style("fill", "#cf1111")
         .attr('id', 'highCirc');
       svg.append("circle")
         .attr("cx",745)
         .attr("cy",55)
         .attr("r", 6)
-        .style("fill", "#0096FF")
+        .style("fill", "#FF8C00")
         .attr('id', 'intCirc');
       svg.append("text")
         .attr("x", 755)
@@ -141,7 +141,7 @@ const drawFloodChart = () => {
       svg.append("path")
         .datum(data)
         .attr("fill", "none")
-        .attr("stroke", 'red')
+        .attr("stroke", '#cf1111')
         .attr("stroke-width", 2.5)
         .attr("d", d3.line()
           .x(function(d) {return x(d.year)})
@@ -153,7 +153,7 @@ const drawFloodChart = () => {
       svg.append("path")
         .datum(data)
         .attr("fill", "none")
-        .attr("stroke", '#0096FF')
+        .attr("stroke", '#FF8C00')
         .attr("stroke-width", 2.5)
         .attr("d", d3.line()
           .x(function(d) {return x(d.year)})
@@ -168,4 +168,6 @@ const drawFloodChart = () => {
   )
 }
 
-drawFloodChart();
+const showFuture = () => {
+  drawFloodChart();
+}
