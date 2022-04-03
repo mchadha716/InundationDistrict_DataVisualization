@@ -154,8 +154,14 @@ h1, h2, h3 {
 	padding: 0 15px;
 }
 
-.hidden-slide {
+.hidden {
 	display: none;
+}
+
+@media (orientation: landscape) {
+	.vis-selection {
+		flex-direction: column;
+	}
 }
 
 /* Fork on GitHub ribbon via https://codepo8.github.io/css-fork-on-github-ribbon/# */  

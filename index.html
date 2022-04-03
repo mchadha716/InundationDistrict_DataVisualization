@@ -115,13 +115,51 @@
         <div>
           <h2 class='storyboard-h2'>Which trend would you like to explore?</h2>
           <div class='button-holder'>
-            <button class='question-button'>Precipitation</button>
-            <button class='question-button' onClick="document.getElementById('flooding-text').scrollIntoView();">Flooding</button>
+            <button class='question-button' onClick="showPrecipitation()">Precipitation</button>
+            <button class='question-button' onClick="showFlooding()">Flooding</button>
           </div>
         </div>
       </div>
     </div>
-    <div class='small-text-section' id="flooding-text">
+    <div class='small-text-section' id="prec-text">
+      <div>
+        <h2 class='storyboard-h2'>Precipitation</h2>
+        <p>
+          Caption
+        </p>
+      </div>
+    </div>
+    <div class='storyboard-section' id='prec-content'>
+      <div class='vis-section'>
+        <div class='vis-holder'>
+          <!-- Change viewbox to whatever you want, e.g., '0 0 1000 6000' This determines your aspect ratio and coordinate system -->
+          <svg id='vis-svg-4' preserveAspectRatio='xMidYMid meet' class='svg-2' viewBox='0 0 1000 1000' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
+          </svg>
+        </div>
+        <div class='vis-caption'>
+          <div id='prec-slide-1' >
+            <h3 class='storyboard-h3' >1920-1990</h3>
+            <p>
+              Caption
+            </p>
+          </div>
+          <div id='prec-slide-2' class='hidden'>
+            <h3 class='storyboard-h3'>1990-2010</h3>
+            <p>
+              Caption
+            </p>
+          </div>
+          <div id='prec-slide-3' class='hidden'>
+            <h3 class='storyboard-h3'>2000-2050</h3>
+            <p>
+              Caption
+            </p>
+          </div>
+          <button class='next-button' onclick='updateChart()'>Next</button>
+        </div>
+      </div>
+    </div>
+    <div class='hidden' id="flooding-text">
       <div>
         <h2 class='storyboard-h2'>Flooding</h2>
         <p>
@@ -139,7 +177,7 @@
         </p>
       </div>
     </div>
-    <div class='storyboard-section'>
+    <div class='hidden' id='flooding-content'>
       <div class='vis-section'>
         <div class='vis-holder'>
           <!-- Change viewbox to whatever you want, e.g., '0 0 1000 6000' This determines your aspect ratio and coordinate system -->
@@ -157,13 +195,13 @@
               city.
             </p>
           </div>
-          <div id='flood-slide-2' class='hidden-slide'>
+          <div id='flood-slide-2' class='hidden'>
             <h3 class='storyboard-h3'>1990-2010</h3>
             <p>
               Caption
             </p>
           </div>
-          <div id='flood-slide-3' class='hidden-slide'>
+          <div id='flood-slide-3' class='hidden'>
             <h3 class='storyboard-h3'>2000-2050</h3>
             <p>
               Caption
@@ -226,6 +264,7 @@
 
   <!-- Scripts at the end avoid need for dealing with async, defer, or onload event handlers -->
   <script src='lib/d3.v7.3.0/d3.js'></script>
+  <script src='js/precipitation_visualizations.js'></script>
   <script src='js/flooding_visualizations.js'></script>
   <script src='js/sea_level_visualization.js'></script>
 </body>

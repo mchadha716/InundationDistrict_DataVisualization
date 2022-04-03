@@ -2,6 +2,39 @@
 // we have multiple functions because of the story-telling aspects of our site, which is 
 // replacing certain elements of interactivity (aproved by Cody)
 
+let precipitation = true;
+
+const setPrecipitation = val => {
+  precipitation = val;
+}
+
+// variable to hold number of clicks on Next button
+let clicks = 0;
+
+const setClicks = count => {
+  clicks = count;
+}
+
+const showPrecipitation = () => {
+  document.getElementById('prec-text').className = 'small-text-section';
+  document.getElementById('prec-content').className = 'storyboard-section';
+  document.getElementById('flooding-text').className = 'hidden';
+  document.getElementById('flooding-content').className = 'hidden';
+  document.getElementById('prec-text').scrollIntoView();
+  setPrecipitation(true);
+  setClicks(0);
+}
+
+const showFlooding = () => {
+  document.getElementById('prec-text').className = 'hidden';
+  document.getElementById('prec-content').className = 'hidden';
+  document.getElementById('flooding-text').className = 'small-text-section';
+  document.getElementById('flooding-content').className = 'storyboard-section';
+  document.getElementById('flooding-text').scrollIntoView();
+  setPrecipitation(false);
+  setClicks(0);
+}
+
 // dimensions for SVG canvas
 let margin = {
   top: 60,
@@ -114,7 +147,7 @@ const pathTransition = (pathId, transition, remove) => {
   // use default or given transition
   const transitionPath = transition || 
     d3.transition()
-      .delay(500)
+      .delay(200)
       .ease(d3.easeSin)
       .duration(2500);
 
@@ -348,17 +381,17 @@ const drawNewChart = () => {
 }
 
 // function for first click of next button
-const firstClick = () => {
+const firstFloodClick = () => {
   // extend line chart
   chartExtension();
 
   // change slides (caption)
-  document.getElementById('flood-slide-1').className = 'hidden-slide';
+  document.getElementById('flood-slide-1').className = 'hidden';
   document.getElementById('flood-slide-2').className = '';
 }
 
 // function for second click of next button
-const secondClick = () => {
+const secondFloodClick = () => {
   // remove current visualization
   removeLineChart();
 
@@ -366,7 +399,7 @@ const secondClick = () => {
   drawNewChart();
 
   // change slides (caption)
-  document.getElementById('flood-slide-2').className = 'hidden-slide';
+  document.getElementById('flood-slide-2').className = 'hidden';
   document.getElementById('flood-slide-3').className = '';
 }
 
@@ -376,16 +409,37 @@ const thirdClick = () => {
   document.getElementById('future-section').scrollIntoView();
 }
 
-// variable to hold number of clicks on Next button
-let clicks = 0;
+// function for first click of next button
+const firstClick = () => {
+  
+  // change slides (caption)
+  document.getElementById('prec-slide-1').className = 'hidden';
+  document.getElementById('prec-slide-2').className = '';
+}
+
+// function for second click of next button
+const secondClick = () => {
+
+  // change slides (caption)
+  document.getElementById('prec-slide-2').className = 'hidden';
+  document.getElementById('prec-slide-3').className = '';
+}
 
 // function to update charts as a result of next button click
 const updateChart = () => {
-  // respond to click with appropriate action
-  clicks++;
-  clicks == 1 && firstClick();
-  clicks == 2 && secondClick();
-  clicks == 3 && thirdClick();
+  if (precipitation) {
+    // respond to click with appropriate action
+    setClicks(clicks + 1);
+    clicks == 1 && firstClick();
+    clicks == 2 && secondClick();
+    clicks == 3 && thirdClick();
+  }
+  else {
+    setClicks(clicks + 1);
+    clicks == 1 && firstFloodClick();
+    clicks == 2 && secondFloodClick();
+    clicks == 3 && thirdClick();
+  }
 }
 
 // call drawChart() on first render
