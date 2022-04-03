@@ -22,7 +22,7 @@ h1, h2, h3 {
 .storyboard-h1 {
   text-align: center;
   font-size: 100px;
-	color: black;
+	color: #0c0c0c;
 }
 
 .storyboard-h2 {
@@ -152,9 +152,9 @@ h1, h2, h3 {
 	color: black;
 }
 
-.vis-img {
+.vis-vid {
 	height: 48vh;
-  width: 32vw;
+  width: 48%;
 }
 
 .vis-caption {
