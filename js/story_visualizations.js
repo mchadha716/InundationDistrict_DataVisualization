@@ -82,7 +82,7 @@ svg.append("text")
   .attr("text-anchor", "end")
   .attr("x", width)
   .attr("y", height - 6)
-  .text("Decade")
+  .text("Year")
   .style("font-size",22)
   .attr('id', 'xlabel');
 
@@ -108,7 +108,7 @@ svg2.append("text")
   .attr("text-anchor", "middle")
   .attr("x", width/2)
   .attr("y", height + 42)
-  .text("Decade")
+  .text("Year")
   .style("font-size",22)
   .attr('id', 'xlabel2');
 
