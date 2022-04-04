@@ -1,13 +1,13 @@
 // this file contains functions to draw the sea level vizualization at the bottom of the page
 const drawFloodChart = () => {
   let margin = {
-    top: 60,
-    left: 100,
-    right: 200,
-    bottom: 35
+    top: 75,
+    left: 75,
+    right: 250,
+    bottom: 75
   },
-  width = 1000 - margin.left - margin.right;
-  height = 1000 - margin.top - margin.bottom;
+  width = 1400 - margin.left - margin.right;
+  height = 1100 - margin.top - margin.bottom;
 
   // svg canvas for all visualizations appearing in this portion of the site
   const svg = d3.select("#vis-svg-5")
@@ -58,6 +58,7 @@ const drawFloodChart = () => {
 
       // x-axis
       svg.append("g")
+        .style("font-size",16)
         .attr("transform", `translate(0, ${height})`)
         .call(d3.axisBottom(x));
       
@@ -77,6 +78,7 @@ const drawFloodChart = () => {
 
       // y-axis
       svg.append("g")
+        .style("font-size",16)
         .call(d3.axisLeft(y));
       
       // y-axis label
@@ -94,33 +96,42 @@ const drawFloodChart = () => {
         .attr("x", width / 2 )
         .attr("y", -16)
         .text("Future Sea Level Rise in Boston")
-        .style("font-size",24)
+        .style("font-size",30)
         .style("text-anchor", "middle");
 
       // legend 
       svg.append("circle")
-        .attr("cx",745)
+        .attr("cx",1155)
         .attr("cy",30)
         .attr("r", 6)
         .style("fill", "#cf1111")
         .attr('id', 'highCirc');
       svg.append("circle")
-        .attr("cx",745)
+        .attr("cx",1155)
         .attr("cy",55)
         .attr("r", 6)
         .style("fill", "#FF8C00")
         .attr('id', 'intCirc');
       svg.append("text")
-        .attr("x", 755)
+        .attr("x", 1165)
         .attr("y", 30)
-        .text("High Estimate")
+        .text("High")
         .style("font-size", 20)
         .attr("alignment-baseline","middle")
         .attr('id', 'highLabel');
       svg.append("text")
-        .attr("x", 755)
+        .attr("x", 1165)
         .attr("y", 55)
-        .text("Intermediate Estimate")
+        .text("Intermediate")
+        .style("font-size", 20)
+        .attr("alignment-baseline","middle")
+        .attr('id', 'intLabel');
+
+
+      svg.append("text")
+        .attr("x", 1085)
+        .attr("y", 707)
+        .text("Development Code")
         .style("font-size", 20)
         .attr("alignment-baseline","middle")
         .attr('id', 'intLabel');

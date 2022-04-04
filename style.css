@@ -57,6 +57,14 @@ h1, h2, h3 {
 	height: 100%;
 }
 
+.final-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+	height: 100%;
+	flex-direction: column;
+}
+
 .centered-text {
 	text-align: center;
 }
@@ -148,8 +156,8 @@ h1, h2, h3 {
 
 .svg-3 {
 	background-color: #f4f1f0;
-	height: 75vh;
-	width: 75%;
+	height: 550px;
+	width: 700px;
 	color: black;
 }
 
