@@ -47,6 +47,15 @@ let margin = {
 width = 1000 - margin.left - margin.right;
 height = 1000 - margin.top - margin.bottom;
 
+let margin2 = {
+  top: 40,
+  left: 80,
+  right: 80,
+  bottom: 50
+};
+width2 = 1000 - margin2.left - margin2.right;
+height2 = 1000 - margin2.top - margin2.bottom;
+
 // svg canvas for all visualizations appearing in this portion of the site
 const svg = d3.select("#vis-svg-3")
   .append("svg")
@@ -58,10 +67,10 @@ const svg = d3.select("#vis-svg-3")
 
 const svg2 = d3.select('#vis-svg-4')
   .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
+    .attr("width", width2 + margin2.left + margin2.right)
+    .attr("height", height2 + margin2.top + margin2.bottom)
   .append("g")
-    .attr("transform",`translate(${margin.left},${margin.top})`);
+    .attr("transform",`translate(${margin2.left},${margin2.top})`);
 
 // x-axis for the first visualizations/ first two slides of this portion of the story
 // domain/range so that data can appear in chunks
@@ -99,27 +108,27 @@ svg.append("g")
   .attr('id', 'yaxis');
 
 const x2 = d3.scaleBand()
-  .range([ 0, width ])
+  .range([ 0, width2 ])
   .domain(['1966-1975', '1977-1986', '1987-1996', '1997-2006', '2007-2016'])
   .padding(0.2);
 
 svg2.append("text")
   .attr("class", "xlabel-2")
   .attr("text-anchor", "middle")
-  .attr("x", width/2)
-  .attr("y", height + 42)
+  .attr("x", width2/2)
+  .attr("y", height2 + 42)
   .text("Year")
   .style("font-size",22)
   .attr('id', 'xlabel2');
 
 svg2.append("g")
-  .attr("transform", `translate(0, ${height})`)
+  .attr("transform", `translate(0, ${height2})`)
   .call(d3.axisBottom(x2));
 
 // Add Y axis
 const y2 = d3.scaleLinear()
   .domain([25, 45])
-  .range([ height, 0]);
+  .range([ height2, 0]);
 svg2.append("g")
   .call(d3.axisLeft(y2));
 
@@ -133,13 +142,6 @@ svg2.append("text")
   .style("font-size",22)
   .attr('id', 'ylabel2');
 
-svg2.append("text")
-  .attr("x", width / 2 )
-  .attr("y", -16)
-  .text("Precipitation In The Northeast")
-  .style("font-size",30)
-  .style("text-anchor", "middle")
-  .attr('id', 'title3');
 
 // label for y-axis
 svg.append("text")
@@ -160,6 +162,14 @@ svg.append("text")
   .style("font-size",30)
   .style("text-anchor", "middle")
   .attr('id', 'title1');
+
+svg2.append("text")
+  .attr("x", width2 / 2 )
+  .attr("y", -16)
+  .text("Heavy Precipitation in the Northeast")
+  .style("font-size",30)
+  .style("text-anchor", "middle")
+  .attr('id', 'title3');
 
 // legend for first visualization
 svg.append("circle")
@@ -411,7 +421,7 @@ const drawNewChart = () => {
         .attr("x", width / 2 )
         .attr("y", -16)
         .text("Future High-Tide Flooding")
-        .style("font-size",24)
+        .style("font-size",30)
         .style("text-anchor", "middle");
 
       // new path for new data
@@ -511,7 +521,7 @@ const drawPrecipitationChart = () => {
           .append("rect")
             .attr("x", function(d) { return x2(d.years); })
             .attr("width", x2.bandwidth())
-            .attr("height", function() { return height - y2(0); })
+            .attr("height", function() { return height2 - y2(0); })
             .attr("y", function() { return y2(0); })
             .attr("fill", "#003366")
             
@@ -521,7 +531,7 @@ const drawPrecipitationChart = () => {
           .delay(100)
           .duration(2500)
           .attr("y", function(d) { return y2(d.inches); })
-          .attr("height", function(d) { return height - y2(d.inches); })
+          .attr("height", function(d) { return height2 - y2(d.inches); })
       }
     )
 }
@@ -542,7 +552,7 @@ const extendPrecipitationChart = () => {
           .append("rect")
             .attr("x", function(d) { return x2(d.years); })
             .attr("width", x2.bandwidth())
-            .attr("height", function() { return height - y2(0); })
+            .attr("height", function() { return height2 - y2(0); })
             .attr("y", function() { return y2(0); })
             .attr("fill", "#003366")
             
@@ -551,7 +561,7 @@ const extendPrecipitationChart = () => {
           .transition()
           .duration(2000)
           .attr("y", function(d) { return y2(d.inches); })
-          .attr("height", function(d) { return height - y2(d.inches); })
+          .attr("height", function(d) { return height2 - y2(d.inches); })
       }
     )
 }
