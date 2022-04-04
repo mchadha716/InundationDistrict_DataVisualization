@@ -21,6 +21,7 @@ const showPrecipitation = () => {
   document.getElementById('flooding-text').className = 'hidden';
   document.getElementById('flooding-content').className = 'hidden';
   document.getElementById('prec-text').scrollIntoView();
+  drawPrecipitationChart();
   setPrecipitation(true);
   setClicks(0);
 }
@@ -54,6 +55,14 @@ const svg = d3.select("#vis-svg-3")
   .append("g")
     .attr("transform",`translate(${margin.left},${margin.top})`);
 
+
+const svg2 = d3.select('#vis-svg-4')
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",`translate(${margin.left},${margin.top})`);
+
 // x-axis for the first visualizations/ first two slides of this portion of the story
 // domain/range so that data can appear in chunks
 // x-scale based on decade data
@@ -69,7 +78,7 @@ svg.append("g")
 
 // label for x-axis
 svg.append("text")
-  .attr("class", "x label")
+  .attr("class", "xlabel")
   .attr("text-anchor", "end")
   .attr("x", width)
   .attr("y", height - 6)
@@ -89,9 +98,52 @@ svg.append("g")
   .call(d3.axisLeft(y))
   .attr('id', 'yaxis');
 
+const x2 = d3.scaleBand()
+  .range([ 0, width ])
+  .domain(['1966-1975', '1977-1986', '1987-1996', '1997-2006', '2007-2016'])
+  .padding(0.2);
+
+svg2.append("text")
+  .attr("class", "xlabel-2")
+  .attr("text-anchor", "middle")
+  .attr("x", width/2)
+  .attr("y", height + 42)
+  .text("Decade")
+  .style("font-size",22)
+  .attr('id', 'xlabel2');
+
+svg2.append("g")
+  .attr("transform", `translate(0, ${height})`)
+  .call(d3.axisBottom(x2));
+
+// Add Y axis
+const y2 = d3.scaleLinear()
+  .domain([25, 45])
+  .range([ height, 0]);
+svg2.append("g")
+  .call(d3.axisLeft(y2));
+
+svg2.append("text")
+  .attr("class", "ylabel-2")
+  .attr("text-anchor", "end")
+  .attr("y", 6)
+  .attr("dy", ".75em")
+  .attr("transform", "rotate(-90)")
+  .text("Average Inches of Precipitation Per Year")
+  .style("font-size",22)
+  .attr('id', 'ylabel2');
+
+svg2.append("text")
+  .attr("x", width / 2 )
+  .attr("y", -16)
+  .text("Precipitation In The Northeast")
+  .style("font-size",30)
+  .style("text-anchor", "middle")
+  .attr('id', 'title3');
+
 // label for y-axis
 svg.append("text")
-  .attr("class", "y label")
+  .attr("class", "ylabel")
   .attr("text-anchor", "end")
   .attr("y", 6)
   .attr("dy", ".75em")
@@ -251,9 +303,15 @@ const chartExtension = () => {
         )
         .attr('id', 'national2');
 
+      // delayed transition
+      const delayedTransition = d3.transition()
+        .delay(800)
+        .ease(d3.easeSin)
+        .duration(2500);
+
       // draw paths on screen
-      pathTransition('#boston2', null, false);
-      pathTransition('#national2', null, false);
+      pathTransition('#boston2', delayedTransition, false);
+      pathTransition('#national2', delayedTransition, false);
     }
   )
 }
@@ -322,7 +380,7 @@ const drawNewChart = () => {
       
       // new x-label for new data
       svg.append("text")
-        .attr("class", "x label")
+        .attr("class", "xlabel")
         .attr("text-anchor", "end")
         .attr("x", width)
         .attr("y", height - 6)
@@ -340,7 +398,7 @@ const drawNewChart = () => {
       
       // new y-label for new data
       svg.append("text")
-          .attr("class", "y label")
+          .attr("class", "ylabel")
           .attr("text-anchor", "end")
           .attr("y", 6)
           .attr("dy", ".75em")
@@ -405,26 +463,21 @@ const secondFloodClick = () => {
 }
 
 // function for third click of next button
-const thirdClick = () => {
+const finalClick = () => {
   // scroll to next section
   document.getElementById('future-section').scrollIntoView();
 }
 
 // function for first click of next button
 const firstClick = () => {
-  
+  //
+  extendPrecipitationChart();
+
   // change slides (caption)
   document.getElementById('prec-slide-1').className = 'hidden';
   document.getElementById('prec-slide-2').className = '';
 }
 
-// function for second click of next button
-const secondClick = () => {
-
-  // change slides (caption)
-  document.getElementById('prec-slide-2').className = 'hidden';
-  document.getElementById('prec-slide-3').className = '';
-}
 
 // function to update charts as a result of next button click
 const updateChart = () => {
@@ -432,15 +485,75 @@ const updateChart = () => {
     // respond to click with appropriate action
     setClicks(clicks + 1);
     clicks == 1 && firstClick();
-    clicks == 2 && secondClick();
-    clicks == 3 && thirdClick();
+    clicks == 2 && finalClick();
   }
   else {
     setClicks(clicks + 1);
     clicks == 1 && firstFloodClick();
     clicks == 2 && secondFloodClick();
-    clicks == 3 && thirdClick();
+    clicks == 3 && finalClick();
   }
+}
+
+const drawPrecipitationChart = () => {
+
+  d3.csv("data/heavy_precipitation_1.csv",
+    function(d){
+      return { 
+        years : d.years, 
+        inches : d3.format(",.2f")(d.inches)
+      }
+    }).then( 
+      function(data) {
+        svg2.selectAll("mybar")
+          .data(data)
+          .enter()
+          .append("rect")
+            .attr("x", function(d) { return x2(d.years); })
+            .attr("width", x2.bandwidth())
+            .attr("height", function() { return height - y2(0); })
+            .attr("y", function() { return y2(0); })
+            .attr("fill", "#003366")
+            
+            
+        svg2.selectAll('rect')
+          .transition()
+          .delay(100)
+          .duration(2500)
+          .attr("y", function(d) { return y2(d.inches); })
+          .attr("height", function(d) { return height - y2(d.inches); })
+      }
+    )
+}
+
+const extendPrecipitationChart = () => {
+  d3.csv("data/heavy_precipitation_2.csv",
+    function(d){
+      return { 
+        years : d.years, 
+        inches : d3.format(",.2f")(d.inches)
+      }
+    }).then( 
+      function(data) {
+        
+        const newRects = svg2.selectAll("mybar")
+          .data(data)
+          .enter()
+          .append("rect")
+            .attr("x", function(d) { return x2(d.years); })
+            .attr("width", x2.bandwidth())
+            .attr("height", function() { return height - y2(0); })
+            .attr("y", function() { return y2(0); })
+            .attr("fill", "#003366")
+            
+            
+        newRects
+          .transition()
+          .duration(2000)
+          .attr("y", function(d) { return y2(d.inches); })
+          .attr("height", function(d) { return height - y2(d.inches); })
+      }
+    )
 }
 
 // call drawChart() on first render

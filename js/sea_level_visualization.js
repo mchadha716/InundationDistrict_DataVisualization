@@ -169,5 +169,6 @@ const drawFloodChart = () => {
 }
 
 const showFuture = () => {
+  document.getElementById('future-chart').scrollIntoView();
   drawFloodChart();
 }
