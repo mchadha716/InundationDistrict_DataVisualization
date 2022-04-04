@@ -58,7 +58,7 @@ const drawFloodChart = () => {
 
       // x-axis
       svg.append("g")
-        .style("font-size",16)
+        .style("font-size",20)
         .attr("transform", `translate(0, ${height})`)
         .call(d3.axisBottom(x));
       
@@ -69,7 +69,7 @@ const drawFloodChart = () => {
         .attr("x", width)
         .attr("y", height - 6)
         .text("Year")
-        .style("font-size",22);
+        .style("font-size",26);
 
       // y-scale
       const y = d3.scaleLinear()
@@ -78,7 +78,7 @@ const drawFloodChart = () => {
 
       // y-axis
       svg.append("g")
-        .style("font-size",16)
+        .style("font-size",20)
         .call(d3.axisLeft(y));
       
       // y-axis label
@@ -89,41 +89,41 @@ const drawFloodChart = () => {
           .attr("dy", ".75em")
           .attr("transform", "rotate(-90)")
           .text("Inches of Sea Level Rise")
-          .style("font-size",22);
+          .style("font-size",26);
 
       // chart title
       svg.append("text")
         .attr("x", width / 2 )
         .attr("y", -16)
         .text("Future Sea Level Rise in Boston")
-        .style("font-size",30)
+        .style("font-size",32)
         .style("text-anchor", "middle");
 
       // legend 
       svg.append("circle")
         .attr("cx",1155)
         .attr("cy",30)
-        .attr("r", 6)
+        .attr("r", 8)
         .style("fill", "#cf1111")
         .attr('id', 'highCirc');
       svg.append("circle")
         .attr("cx",1155)
         .attr("cy",55)
-        .attr("r", 6)
+        .attr("r", 8)
         .style("fill", "#FF8C00")
         .attr('id', 'intCirc');
       svg.append("text")
-        .attr("x", 1165)
+        .attr("x", 1175)
         .attr("y", 30)
         .text("High")
-        .style("font-size", 20)
+        .style("font-size", 24)
         .attr("alignment-baseline","middle")
         .attr('id', 'highLabel');
       svg.append("text")
-        .attr("x", 1165)
+        .attr("x", 1175)
         .attr("y", 55)
         .text("Intermediate")
-        .style("font-size", 20)
+        .style("font-size", 24)
         .attr("alignment-baseline","middle")
         .attr('id', 'intLabel');
 
@@ -132,7 +132,7 @@ const drawFloodChart = () => {
         .attr("x", 1085)
         .attr("y", 707)
         .text("Development Code")
-        .style("font-size", 20)
+        .style("font-size", 24)
         .attr("alignment-baseline","middle")
         .attr('id', 'intLabel');
 

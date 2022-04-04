@@ -44,17 +44,17 @@ let margin = {
   right: 200,
   bottom: 35
 },
-width = 1000 - margin.left - margin.right;
-height = 1000 - margin.top - margin.bottom;
+width = 1100 - margin.left - margin.right;
+height = 1260 - margin.top - margin.bottom;
 
 let margin2 = {
-  top: 40,
+  top: 75,
   left: 80,
   right: 80,
-  bottom: 50
+  bottom: 85
 };
-width2 = 1000 - margin2.left - margin2.right;
-height2 = 1000 - margin2.top - margin2.bottom;
+width2 = 1100 - margin2.left - margin2.right;
+height2 = 1260 - margin2.top - margin2.bottom;
 
 // svg canvas for all visualizations appearing in this portion of the site
 const svg = d3.select("#vis-svg-3")
@@ -81,6 +81,7 @@ const x = d3.scaleTime()
 
 // line/ticks for x-axis
 svg.append("g")
+  .style("font-size",20)
   .attr("transform", `translate(0, ${height})`)
     .call(d3.axisBottom(x))
     .attr('id', 'xaxis');
@@ -92,7 +93,7 @@ svg.append("text")
   .attr("x", width)
   .attr("y", height - 6)
   .text("Year")
-  .style("font-size",22)
+  .style("font-size",26)
   .attr('id', 'xlabel');
 
 // y-axis for first visualization
@@ -104,6 +105,7 @@ const y = d3.scaleLinear()
 
 // line/ticks for y-axis
 svg.append("g")
+  .style("font-size",20)
   .call(d3.axisLeft(y))
   .attr('id', 'yaxis');
 
@@ -116,12 +118,13 @@ svg2.append("text")
   .attr("class", "xlabel-2")
   .attr("text-anchor", "middle")
   .attr("x", width2/2)
-  .attr("y", height2 + 42)
+  .attr("y", height2 + 60)
   .text("Decade")
-  .style("font-size",22)
+  .style("font-size",26)
   .attr('id', 'xlabel2');
 
 svg2.append("g")
+  .style("font-size",20)
   .attr("transform", `translate(0, ${height2})`)
   .call(d3.axisBottom(x2));
 
@@ -129,7 +132,9 @@ svg2.append("g")
 const y2 = d3.scaleLinear()
   .domain([25, 45])
   .range([ height2, 0]);
+
 svg2.append("g")
+  .style("font-size",20)
   .call(d3.axisLeft(y2));
 
 svg2.append("text")
@@ -139,7 +144,7 @@ svg2.append("text")
   .attr("dy", ".75em")
   .attr("transform", "rotate(-90)")
   .text("Average Inches of Precipitation Per Year")
-  .style("font-size",22)
+  .style("font-size",26)
   .attr('id', 'ylabel2');
 
 
@@ -151,7 +156,7 @@ svg.append("text")
   .attr("dy", ".75em")
   .attr("transform", "rotate(-90)")
   .text("Number of High-Tide Flood Days")
-  .style("font-size",22)
+  .style("font-size",26)
   .attr('id', 'ylabel');
 
 // title for first visualization
@@ -159,7 +164,7 @@ svg.append("text")
   .attr("x", width / 2 )
   .attr("y", -16)
   .text("Past High-Tide Flooding")
-  .style("font-size",30)
+  .style("font-size",32)
   .style("text-anchor", "middle")
   .attr('id', 'title1');
 
@@ -167,35 +172,35 @@ svg2.append("text")
   .attr("x", width2 / 2 )
   .attr("y", -16)
   .text("Heavy Precipitation in the Northeast")
-  .style("font-size",30)
+  .style("font-size",32)
   .style("text-anchor", "middle")
   .attr('id', 'title3');
 
 // legend for first visualization
 svg.append("circle")
-  .attr("cx",745)
+  .attr("cx",825)
   .attr("cy",30)
-  .attr("r", 6)
+  .attr("r", 8)
   .style("fill", "#ff6961")
   .attr('id', 'bostonCirc');
 svg.append("circle")
-  .attr("cx",745)
+  .attr("cx",825)
   .attr("cy",55)
-  .attr("r", 6)
+  .attr("r", 8)
   .style("fill", "#17BEBB")
   .attr('id', 'natCirc');
 svg.append("text")
-  .attr("x", 755)
+  .attr("x", 845)
   .attr("y", 30)
   .text("Boston")
-  .style("font-size", 20)
+  .style("font-size", 24)
   .attr("alignment-baseline","middle")
   .attr('id', 'bostonLabel');
 svg.append("text")
-  .attr("x", 755)
+  .attr("x", 845)
   .attr("y", 55)
   .text("National Avg.")
-  .style("font-size", 20)
+  .style("font-size", 24)
   .attr("alignment-baseline","middle")
   .attr('id', 'natLabel');
 
@@ -385,6 +390,7 @@ const drawNewChart = () => {
 
       // new x-axis based on new data
       svg.append("g")
+        .style("font-size",20)
         .attr("transform", `translate(0, ${height})`)
         .call(d3.axisBottom(x).tickValues(tickValues));
       
@@ -395,7 +401,7 @@ const drawNewChart = () => {
         .attr("x", width)
         .attr("y", height - 6)
         .text("Year")
-        .style("font-size",22);
+        .style("font-size",26);
 
       // new y-scale for new data
       const y = d3.scaleLinear()
@@ -404,6 +410,7 @@ const drawNewChart = () => {
 
       // new y-axis for new data
       svg.append("g")
+        .style("font-size",20)
         .call(d3.axisLeft(y));
       
       // new y-label for new data
@@ -414,14 +421,14 @@ const drawNewChart = () => {
           .attr("dy", ".75em")
           .attr("transform", "rotate(-90)")
           .text("Number of High-Tide Flood Days")
-          .style("font-size",22);
+          .style("font-size",26);
 
       // new chart title for new data
       svg.append("text")
         .attr("x", width / 2 )
         .attr("y", -16)
         .text("Future High-Tide Flooding")
-        .style("font-size",30)
+        .style("font-size",32)
         .style("text-anchor", "middle");
 
       // new path for new data
