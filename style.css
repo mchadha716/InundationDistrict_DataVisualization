@@ -1,6 +1,6 @@
 /* General formatting */
 body {
-  font-size: 18px;
+  font-size: 20px;
   font-family: Arial;
   background-color: #0c0c0c;
   color: white;
@@ -81,10 +81,13 @@ h1, h2, h3 {
 	display: flex;
 }
 
-.intro-text {
-	height: 45%;
-	margin-bottom: 40px;
-	margin-top: 60px;
+.text-section {
+	width: 750px;
+	line-height: 1.6;
+}
+
+.vis-text {
+	line-height: 1.4;
 }
 
 .intro-vis-holder {
@@ -187,8 +190,7 @@ h1, h2, h3 {
 }
 
 .vis-vid {
-	height: 48vh;
-  width: 48%;
+	width: 75vw;
 }
 
 .vis-caption {

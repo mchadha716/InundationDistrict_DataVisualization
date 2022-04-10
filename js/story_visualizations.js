@@ -34,7 +34,7 @@ const setPrecSlide = val => {
 }
 
 const showPrecipitation = () => {
-  document.getElementById('prec-text').className = 'small-text-section';
+  document.getElementById('prec-text').className = 'storyboard-section';
   document.getElementById('prec-content').className = 'storyboard-section';
   document.getElementById('flooding-text').className = 'hidden';
   document.getElementById('flooding-content').className = 'hidden';
@@ -48,7 +48,7 @@ const showPrecipitation = () => {
 const showFlooding = () => {
   document.getElementById('prec-text').className = 'hidden';
   document.getElementById('prec-content').className = 'hidden';
-  document.getElementById('flooding-text').className = 'small-text-section';
+  document.getElementById('flooding-text').className = 'storyboard-section';
   document.getElementById('flooding-content').className = 'storyboard-section';
   document.getElementById('flooding-text').scrollIntoView();
   setFirstVisLoaded(true);
@@ -114,7 +114,7 @@ svg.append("text")
   .attr("text-anchor", "end")
   .attr("x", width)
   .attr("y", height - 6)
-  .text("Year")
+  .text("Decade")
   .style("font-size",26)
   .attr('id', 'xlabel');
 
