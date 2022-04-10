@@ -119,10 +119,9 @@ h1, h2, h3 {
 	margin-top: 40px;
 }
 
-.next-button {
+.button {
 	border-radius: 35px;
-	width: 80px;
-	height: 45px;
+	padding: 10px 15px;
 	border: none;
 	color: #161616;
 	background: white;
@@ -133,8 +132,7 @@ h1, h2, h3 {
 
 .continue-button {
 	border-radius: 35px;
-	width: 100px;
-	height: 45px;
+	padding: 10px 15px;
 	border: none;
 	color: #161616;
 	background: white;
@@ -144,17 +142,6 @@ h1, h2, h3 {
 	margin-right: 10px;
 }
 
-.view-button {
-	border-radius: 35px;
-	width: 150px;
-	height: 45px;
-	border: none;
-	color: #161616;
-	background: white;
-	font-size: 18px;
-	float: right;
-	margin-top: 15px;
-}
 
 /* Your text should be in a nice narrow column */
 .content-column {

@@ -514,23 +514,16 @@ const secondFloodClick = () => {
 
 // function for first click of next button
 const firstClick = () => {
-  if (firstVisLoaded) {
-    //
-    extendPrecipitationChart();
-
-    // change slides (caption)
-    document.getElementById('prec-slide-1').className = 'hidden';
-    document.getElementById('prec-slide-2').className = '';
-  }
-  else {
-    showPrecipitation();
-    extendPrecipitationChart();
 
     // change slides (caption)
     document.getElementById('prec-slide-1').className = 'hidden';
     document.getElementById('prec-slide-2').className = '';
     document.getElementById('next').className = 'hidden';
     document.getElementById('continue').className = 'continue-button';
+    extendPrecipitationChart();
+  if (!firstVisLoaded) {
+    setClicks(clicks + 1);
+    showPrecipitation();
   }
 }
 
