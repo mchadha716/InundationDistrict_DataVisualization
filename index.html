@@ -63,18 +63,18 @@
           </video>
         </div>
     </div>
-    <div class='storyboard-section'>
+    <div class='storyboard-section' id='choice-section'>
       <div class='centered-section'>
         <div>
           <h2 class='storyboard-h2'>Which trend would you like to explore?</h2>
           <div class='button-holder'>
-            <button class='question-button' onClick="showPrecipitation()">Precipitation</button>
             <button class='question-button' onClick="showFlooding()">Flooding</button>
+            <button class='question-button' onClick="showPrecipitation()">Precipitation</button>
           </div>
         </div>
       </div>
     </div>
-    <div class='small-text-section' id="prec-text">
+    <div class='hidden' id="prec-text">
       <div>
         <h2 class='storyboard-h2'>Precipitation</h2>
         <p>
@@ -89,7 +89,7 @@
         </p>
       </div>
     </div>
-    <div class='storyboard-section' id='prec-content'>
+    <div class='hidden' id='prec-content'>
       <div class='vis-section'>
         <div class='vis-holder'>
           <!-- Change viewbox to whatever you want, e.g., '0 0 1000 6000' This determines your aspect ratio and coordinate system -->
@@ -128,12 +128,14 @@
               Dartmouth, concludes that “humans are in fact, partially responsible for the increase in heavy 
               rain events that we have been experiencing over the past two and a half decades.”
             </p>
+            <button class='view-button' id='view-flooding' onclick='showFlooding()'>View Flooding</button>
           </div>
-          <button class='next-button' onclick='updateChart()'>Next</button>
+          <button class='next-button' id='next' onclick='updateChart()'>Next</button>
+          <button class='hidden' id='continue' onclick='moveOn()'>Continue</button>
         </div>
       </div>
     </div>
-    <div class='hidden' id="flooding-text">
+    <div class='small-text-section' id="flooding-text">
       <div>
         <h2 class='storyboard-h2'>Flooding</h2>
         <p>
@@ -151,7 +153,7 @@
         </p>
       </div>
     </div>
-    <div class='hidden' id='flooding-content'>
+    <div class='storyboard-section' id='flooding-content'>
       <div class='vis-section'>
         <div class='vis-holder'>
           <!-- Change viewbox to whatever you want, e.g., '0 0 1000 6000' This determines your aspect ratio and coordinate system -->
@@ -192,8 +194,10 @@
               stormwater systems, MBTA lines, and roads.” Predictions such as these are based on the “range of relative sea 
               level rise,” using intermediate scenarios from the National Climate Assessment.
             </p>
+            <button class='view-button' id='view-prec' onclick='showPrecipitation()'>View Precipitation</button>
           </div>
-          <button class='next-button' onclick='updateChart()'>Next</button>
+          <button class='next-button' id='next-flood' onclick='updateChart()'>Next</button>
+          <button class='hidden' id='continue-flood' onclick='moveOn()'>Continue</button>
         </div>
       </div>
     </div>

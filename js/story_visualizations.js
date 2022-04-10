@@ -2,10 +2,22 @@
 // we have multiple functions because of the story-telling aspects of our site, which is 
 // replacing certain elements of interactivity (aproved by Cody)
 
-let precipitation = true;
+let precipitation = false;
 
 const setPrecipitation = val => {
   precipitation = val;
+}
+
+let firstVisLoaded = false;
+
+const setFirstVisLoaded = val => {
+  firstVisLoaded = val;
+}
+
+let alreadyShown = false;
+
+const setAlreadyShown = val => {
+  alreadyShown = val;
 }
 
 // variable to hold number of clicks on Next button
@@ -22,6 +34,7 @@ const showPrecipitation = () => {
   document.getElementById('flooding-content').className = 'hidden';
   document.getElementById('prec-text').scrollIntoView();
   drawPrecipitationChart();
+  setFirstVisLoaded(true);
   setPrecipitation(true);
   setClicks(0);
 }
@@ -32,9 +45,12 @@ const showFlooding = () => {
   document.getElementById('flooding-text').className = 'small-text-section';
   document.getElementById('flooding-content').className = 'storyboard-section';
   document.getElementById('flooding-text').scrollIntoView();
-  drawChart();
+  setFirstVisLoaded(true);
   setPrecipitation(false);
   setClicks(0);
+  if (!alreadyShown) {
+    drawChart();
+  }
 }
 
 // dimensions for SVG canvas
@@ -458,12 +474,24 @@ const drawNewChart = () => {
 
 // function for first click of next button
 const firstFloodClick = () => {
-  // extend line chart
-  chartExtension();
+  if (firstVisLoaded) {
+    // extend line chart
+    chartExtension();
 
-  // change slides (caption)
-  document.getElementById('flood-slide-1').className = 'hidden';
-  document.getElementById('flood-slide-2').className = '';
+    // change slides (caption)
+    document.getElementById('flood-slide-1').className = 'hidden';
+    document.getElementById('flood-slide-2').className = '';
+  }
+  else {
+    showFlooding();
+    // extend line chart
+    chartExtension();
+
+    // change slides (caption)
+    document.getElementById('flood-slide-1').className = 'hidden';
+    document.getElementById('flood-slide-2').className = '';
+  }
+
 }
 
 // function for second click of next button
@@ -474,25 +502,36 @@ const secondFloodClick = () => {
   // draw new chart
   drawNewChart();
 
+  setAlreadyShown(true);
+
   // change slides (caption)
+
+  document.getElementById('next-flood').className = 'hidden';
+  document.getElementById('continue-flood').className = 'continue-button';
   document.getElementById('flood-slide-2').className = 'hidden';
   document.getElementById('flood-slide-3').className = '';
 }
 
-// function for third click of next button
-const finalClick = () => {
-  // scroll to next section
-  document.getElementById('future-section').scrollIntoView();
-}
-
 // function for first click of next button
 const firstClick = () => {
-  //
-  extendPrecipitationChart();
+  if (firstVisLoaded) {
+    //
+    extendPrecipitationChart();
 
-  // change slides (caption)
-  document.getElementById('prec-slide-1').className = 'hidden';
-  document.getElementById('prec-slide-2').className = '';
+    // change slides (caption)
+    document.getElementById('prec-slide-1').className = 'hidden';
+    document.getElementById('prec-slide-2').className = '';
+  }
+  else {
+    showPrecipitation();
+    extendPrecipitationChart();
+
+    // change slides (caption)
+    document.getElementById('prec-slide-1').className = 'hidden';
+    document.getElementById('prec-slide-2').className = '';
+    document.getElementById('next').className = 'hidden';
+    document.getElementById('continue').className = 'continue-button';
+  }
 }
 
 
@@ -502,15 +541,18 @@ const updateChart = () => {
     // respond to click with appropriate action
     setClicks(clicks + 1);
     clicks == 1 && firstClick();
-    clicks == 2 && finalClick();
   }
   else {
     setClicks(clicks + 1);
     clicks == 1 && firstFloodClick();
     clicks == 2 && secondFloodClick();
-    clicks == 3 && finalClick();
   }
 }
+
+const moveOn = () => {
+  document.getElementById('future-section').scrollIntoView();
+}
+
 
 const drawPrecipitationChart = () => {
 

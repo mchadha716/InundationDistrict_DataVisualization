@@ -131,6 +131,31 @@ h1, h2, h3 {
 	margin-top: 15px;
 }
 
+.continue-button {
+	border-radius: 35px;
+	width: 100px;
+	height: 45px;
+	border: none;
+	color: #161616;
+	background: white;
+	font-size: 18px;
+	float: right;
+	margin-top: 15px;
+	margin-right: 10px;
+}
+
+.view-button {
+	border-radius: 35px;
+	width: 150px;
+	height: 45px;
+	border: none;
+	color: #161616;
+	background: white;
+	font-size: 18px;
+	float: right;
+	margin-top: 15px;
+}
+
 /* Your text should be in a nice narrow column */
 .content-column {
 	max-width: 650px;
