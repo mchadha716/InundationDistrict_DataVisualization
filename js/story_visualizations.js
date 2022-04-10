@@ -21,10 +21,16 @@ const setAlreadyShown = val => {
 }
 
 // variable to hold number of clicks on Next button
-let clicks = 0;
+let floodSlide = 0;
 
-const setClicks = count => {
-  clicks = count;
+const setFloodSlide = val => {
+  floodSlide = val;
+}
+
+let precSlide = 0;
+
+const setPrecSlide = val => {
+  precSlide = val;
 }
 
 const showPrecipitation = () => {
@@ -36,7 +42,7 @@ const showPrecipitation = () => {
   drawPrecipitationChart();
   setFirstVisLoaded(true);
   setPrecipitation(true);
-  setClicks(0);
+  setPrecSlide(1);
 }
 
 const showFlooding = () => {
@@ -47,7 +53,7 @@ const showFlooding = () => {
   document.getElementById('flooding-text').scrollIntoView();
   setFirstVisLoaded(true);
   setPrecipitation(false);
-  setClicks(0);
+  setFloodSlide(1);
   if (!alreadyShown) {
     drawChart();
   }
@@ -370,14 +376,15 @@ const removeLineChart = () => {
   pathTransition('#national', transition2, true);
 
   // remove axes, labels, titles and national part of legend
-  d3.select('#xlabel').remove();
-  d3.select('#xaxis').remove();
-  d3.select('#ylabel').remove();
-  d3.select('#yaxis').remove();
-  d3.select('#natCirc').remove();
-  d3.select('#natLabel').remove();
-  d3.select('#title1').remove();
+  d3.select('#xlabel').classed('hidden', true);
+  d3.select('#xaxis').classed('hidden', true);
+  d3.select('#ylabel').classed('hidden', true);
+  d3.select('#yaxis').classed('hidden', true);
+  d3.select('#natCirc').classed('hidden', true);
+  d3.select('#natLabel').classed('hidden', true);
+  d3.select('#title1').classed('hidden', true);
 }
+
 
 // function to draw second visualization on same svg canvas
 const drawNewChart = () => {
@@ -408,6 +415,7 @@ const drawNewChart = () => {
       svg.append("g")
         .style("font-size",20)
         .attr("transform", `translate(0, ${height})`)
+        .attr('id', 'futurexaxis')
         .call(d3.axisBottom(x).tickValues(tickValues));
       
       // new x-label for new data
@@ -417,6 +425,7 @@ const drawNewChart = () => {
         .attr("x", width)
         .attr("y", height - 6)
         .text("Year")
+        .attr('id', 'futurexlabel')
         .style("font-size",26);
 
       // new y-scale for new data
@@ -427,6 +436,7 @@ const drawNewChart = () => {
       // new y-axis for new data
       svg.append("g")
         .style("font-size",20)
+        .attr('id', 'futureyaxis')
         .call(d3.axisLeft(y));
       
       // new y-label for new data
@@ -435,6 +445,7 @@ const drawNewChart = () => {
           .attr("text-anchor", "end")
           .attr("y", 6)
           .attr("dy", ".75em")
+          .attr('id', 'futureylabel')
           .attr("transform", "rotate(-90)")
           .text("Number of High-Tide Flood Days")
           .style("font-size",26);
@@ -444,6 +455,7 @@ const drawNewChart = () => {
         .attr("x", width / 2 )
         .attr("y", -16)
         .text("Future High-Tide Flooding")
+        .attr('id', 'futuretitle')
         .style("font-size",32)
         .style("text-anchor", "middle");
 
@@ -522,9 +534,56 @@ const firstClick = () => {
     document.getElementById('continue').className = 'continue-button';
     extendPrecipitationChart();
   if (!firstVisLoaded) {
-    setClicks(clicks + 1);
     showPrecipitation();
   }
+}
+
+const firstBackClick = () => {
+  document.getElementById('choice-section').scrollIntoView();
+}
+
+const secondPrecBackClick = () => {
+
+  // change slides (caption)
+  document.getElementById('prec-slide-1').className = '';
+  document.getElementById('prec-slide-2').className = 'hidden';
+  document.getElementById('next').className = 'button';
+  document.getElementById('continue').className = 'hidden';
+  d3.selectAll("#lastBars")
+    .transition()
+    .duration(2500)
+    .attr("y", function() { return 1100; })
+    .attr("height", function() { return 0; })
+}
+
+const secondFloodBackClick = () => {
+    pathTransition('#boston2', null, true);
+    pathTransition('#national2', null, true);
+    // change slides (caption)
+    document.getElementById('flood-slide-2').className = 'hidden';
+    document.getElementById('flood-slide-1').className = '';
+}
+
+const thirdFloodBackClick = () => {
+  d3.select('#xlabel').classed('hidden', false);
+  d3.select('#xaxis').classed('hidden', false);
+  d3.select('#ylabel').classed('hidden', false);
+  d3.select('#yaxis').classed('hidden', false);
+  d3.select('#natCirc').classed('hidden', false);
+  d3.select('#natLabel').classed('hidden', false);
+  d3.select('#title1').classed('hidden', false);
+  d3.select('#futurexaxis').classed('hidden', true);
+  d3.select('#futurexlabel').classed('hidden', true);
+  d3.select('#futureyaxis').classed('hidden', true);
+  d3.select('#futureylabel').classed('hidden', true);
+  d3.select('#futuretitle').classed('hidden', true);
+  pathTransition('#futurePath', null, true);
+  // change slides (caption)
+  document.getElementById('flood-slide-3').className = 'hidden';
+  document.getElementById('flood-slide-2').className = '';
+
+  drawChart();
+  chartExtension();
 }
 
 
@@ -532,13 +591,27 @@ const firstClick = () => {
 const updateChart = () => {
   if (precipitation) {
     // respond to click with appropriate action
-    setClicks(clicks + 1);
-    clicks == 1 && firstClick();
+    precSlide == 1 && firstClick();
+    setPrecSlide(precSlide + 1);
   }
   else {
-    setClicks(clicks + 1);
-    clicks == 1 && firstFloodClick();
-    clicks == 2 && secondFloodClick();
+    floodSlide == 1 && firstFloodClick();
+    floodSlide == 2 && secondFloodClick();
+    setFloodSlide(floodSlide + 1);
+  }
+}
+
+const goBack = () => {
+  if (precipitation) {
+    precSlide == 1 && firstBackClick();
+    precSlide == 2 && secondPrecBackClick();
+    setPrecSlide(precSlide - 1);
+  }
+  else {
+    floodSlide == 1 && firstBackClick();
+    floodSlide == 2 && secondFloodBackClick();
+    floodSlide == 3 && thirdFloodBackClick();
+    setFloodSlide(floodSlide - 1);
   }
 }
 
@@ -563,8 +636,8 @@ const drawPrecipitationChart = () => {
           .append("rect")
             .attr("x", function(d) { return x2(d.years); })
             .attr("width", x2.bandwidth())
-            .attr("height", function() { return height2 - y2(0); })
-            .attr("y", function() { return y2(0); })
+            .attr("height", function() { return 0; })
+            .attr("y", function() { return 1100; })
             .attr("fill", "#003366")
             
             
@@ -594,9 +667,10 @@ const extendPrecipitationChart = () => {
           .append("rect")
             .attr("x", function(d) { return x2(d.years); })
             .attr("width", x2.bandwidth())
-            .attr("height", function() { return height2 - y2(0); })
-            .attr("y", function() { return y2(0); })
+            .attr("height", function() { return 0; })
+            .attr("y", function() { return 1100; })
             .attr("fill", "#003366")
+            .attr('id', 'lastBars')
             
             
         newRects

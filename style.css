@@ -142,6 +142,17 @@ h1, h2, h3 {
 	margin-right: 10px;
 }
 
+.back-button {
+	border-radius: 35px;
+	padding: 10px 15px;
+	border: none;
+	color: #161616;
+	background: white;
+	font-size: 18px;
+	float: left;
+	margin-top: 15px;
+}
+
 
 /* Your text should be in a nice narrow column */
 .content-column {
