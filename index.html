@@ -172,7 +172,7 @@
               precipitation result from an increase of greenhouse gasses caused by human activity and 
               variable surface temperatures in the Atlantic Ocean. 
             </p>
-            <button class='button' id='view-flooding' onclick='showFlooding()'>View Flooding</button>
+            <button class='button' id='view-flooding' onclick='switchStory(false)'>View Flooding</button>
           </div>
           <button class='back-button' id='back' onclick='goBack()'>Back</button>
           <button class='button' id='next' onclick='updateChart()'>Next</button>
@@ -241,7 +241,7 @@
               Such a drastic rise in flooding “endangers crucial infrastructure in Boston, including waste and 
               stormwater systems, MBTA lines, and roads.” 
             </p>
-            <button class='button' id='view-prec' onclick='showPrecipitation()'>View Precipitation</button>
+            <button class='button' id='view-prec' onclick='switchStory(true)'>View Precipitation</button>
           </div>
           <button class='back-button' id='back-flood' onclick='goBack()'>Back</button>
           <button class='button' id='next-flood' onclick='updateChart()'>Next</button>
@@ -271,11 +271,11 @@
     </div>
     <div class='storyboard-section' id="future-chart">
       <div class='centered-section'>
-        <div>
-        <svg id='vis-svg-5' preserveAspectRatio='xMidYMid meet' class='svg-3' viewBox='0 0 1400 1100' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
-        </svg>
-        <button class='back-button' onclick="document.getElementById('future-transition').scrollIntoView();">Back</button>
-        <button class='button' onclick="document.getElementById('future-text').scrollIntoView();">Next</button>
+        <div class='mid-div'>
+          <svg id='vis-svg-5' preserveAspectRatio='xMidYMid meet' class='svg-3' viewBox='0 0 1400 1100' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
+          </svg>
+          <button class='back-button' onclick="document.getElementById('future-transition').scrollIntoView();">Back</button>
+          <button class='button' onclick="document.getElementById('future-text').scrollIntoView();">Next</button>
         </div>
       </div>
     </div>
@@ -378,6 +378,12 @@
       <li><a href="https://medium.com/@louisemoxy/create-a-d3-line-chart-animation-336f1cb7dd61">
           Create a D3 line chart animation</a>
         by Louise Moxy is used to create the animations on the line charts.
+      </li>
+      <li><a href="https://www.hdwallpapers.in/ocean_waves_aerial_view-wallpapers.html">
+          HD Wallpaper</a>
+        by Michael Schaueer is used for the background of the first screen on this website.
+      </a>
+
       </li>
     </ul>
   </div>

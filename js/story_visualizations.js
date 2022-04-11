@@ -94,7 +94,8 @@ const x = d3.scaleTime()
 
 // line/ticks for x-axis
 svg.append("g")
-  .style("font-size",20)
+  .style("font-size",24)
+  .attr("stroke-width", 2.5)
   .attr("transform", `translate(0, ${height})`)
     .call(d3.axisBottom(x))
     .attr('id', 'xaxis');
@@ -106,7 +107,7 @@ svg.append("text")
   .attr("x", width)
   .attr("y", height - 6)
   .text("Decade")
-  .style("font-size",26)
+  .style("font-size",28)
   .attr('id', 'xlabel');
 
 // y-axis for first visualization
@@ -118,7 +119,8 @@ const y = d3.scaleLinear()
 
 // line/ticks for y-axis
 svg.append("g")
-  .style("font-size",20)
+  .attr("stroke-width", 2.5)
+  .style("font-size",24)
   .call(d3.axisLeft(y))
   .attr('id', 'yaxis');
 
@@ -137,7 +139,8 @@ svg2.append("text")
   .attr('id', 'xlabel2');
 
 svg2.append("g")
-  .style("font-size",20)
+  .attr("stroke-width", 2.5)
+  .style("font-size",24)
   .attr("transform", `translate(0, ${height2})`)
   .call(d3.axisBottom(x2));
 
@@ -147,7 +150,8 @@ const y2 = d3.scaleLinear()
   .range([ height2, 0]);
 
 svg2.append("g")
-  .style("font-size",20)
+  .attr("stroke-width", 2.5)
+  .style("font-size",24)
   .call(d3.axisLeft(y2));
 
 svg2.append("text")
@@ -169,7 +173,7 @@ svg.append("text")
   .attr("dy", ".75em")
   .attr("transform", "rotate(-90)")
   .text("Number of High-Tide Flood Days")
-  .style("font-size",26)
+  .style("font-size",28)
   .attr('id', 'ylabel');
 
 // title for first visualization
@@ -206,14 +210,14 @@ svg.append("text")
   .attr("x", 845)
   .attr("y", 30)
   .text("Boston")
-  .style("font-size", 24)
+  .style("font-size", 26)
   .attr("alignment-baseline","middle")
   .attr('id', 'bostonLabel');
 svg.append("text")
   .attr("x", 845)
   .attr("y", 55)
   .text("National Avg.")
-  .style("font-size", 24)
+  .style("font-size", 26)
   .attr("alignment-baseline","middle")
   .attr('id', 'natLabel');
 
@@ -363,8 +367,18 @@ const removeLineChart = () => {
   // remove each path
   pathTransition('#boston2', transition1, true);
   pathTransition('#national2', transition1, true);
-  pathTransition('#boston', transition2, true);
-  pathTransition('#national', transition2, true);
+
+  const bostonPathLength = d3.selectAll('#boston').node().getTotalLength();
+  d3.selectAll('#boston')
+    .transition(transition2)
+    .attr("stroke-dasharray", bostonPathLength)
+    .attr("stroke-dashoffset", bostonPathLength);
+
+  const natPathLength = d3.selectAll('#national').node().getTotalLength();
+  d3.selectAll('#national')
+    .transition(transition2)
+    .attr("stroke-dasharray", natPathLength)
+    .attr("stroke-dashoffset", natPathLength);
 
   // remove axes, labels, titles and national part of legend
   d3.select('#xlabel').classed('hidden', true);
@@ -404,7 +418,8 @@ const drawNewChart = () => {
 
       // new x-axis based on new data
       svg.append("g")
-        .style("font-size",20)
+        .attr("stroke-width", 2.5)
+        .style("font-size",24)
         .attr("transform", `translate(0, ${height})`)
         .attr('id', 'futurexaxis')
         .call(d3.axisBottom(x).tickValues(tickValues));
@@ -417,7 +432,7 @@ const drawNewChart = () => {
         .attr("y", height - 6)
         .text("Year")
         .attr('id', 'futurexlabel')
-        .style("font-size",26);
+        .style("font-size",28);
 
       // new y-scale for new data
       const y = d3.scaleLinear()
@@ -426,7 +441,8 @@ const drawNewChart = () => {
 
       // new y-axis for new data
       svg.append("g")
-        .style("font-size",20)
+        .attr("stroke-width", 2.5)
+        .style("font-size",24)
         .attr('id', 'futureyaxis')
         .call(d3.axisLeft(y));
       
@@ -439,7 +455,7 @@ const drawNewChart = () => {
           .attr('id', 'futureylabel')
           .attr("transform", "rotate(-90)")
           .text("Number of High-Tide Flood Days")
-          .style("font-size",26);
+          .style("font-size",28);
 
       // new chart title for new data
       svg.append("text")
@@ -477,7 +493,7 @@ const drawNewChart = () => {
 
 // function for first click of next button
 const firstFloodClick = () => {
-  showFlooding();
+    showFlooding();
     // extend line chart
     chartExtension();
 
@@ -537,8 +553,23 @@ const secondPrecBackClick = () => {
 }
 
 const secondFloodBackClick = () => {
-    pathTransition('#boston2', null, true);
-    pathTransition('#national2', null, true);
+  const bostonPathLength = d3.selectAll('#boston2').node().getTotalLength();
+  d3.selectAll('#boston2')
+    .transition()
+    .delay(200)
+    .ease(d3.easeSin)
+    .duration(2500)
+    .attr("stroke-dasharray", bostonPathLength)
+    .attr("stroke-dashoffset", bostonPathLength);
+
+  const natPathLength = d3.selectAll('#national2').node().getTotalLength();
+  d3.selectAll('#national2')
+    .transition()
+    .delay(200)
+    .ease(d3.easeSin)
+    .duration(2500)
+    .attr("stroke-dasharray", natPathLength)
+    .attr("stroke-dashoffset", natPathLength);
     // change slides (caption)
     document.getElementById('flood-slide-2').className = 'hidden';
     document.getElementById('flood-slide-1').className = '';
@@ -557,6 +588,8 @@ const thirdFloodBackClick = () => {
   d3.select('#futureyaxis').classed('hidden', true);
   d3.select('#futureylabel').classed('hidden', true);
   d3.select('#futuretitle').classed('hidden', true);
+  document.getElementById('continue-flood').className = 'hidden';
+  document.getElementById('next-flood').className = 'button';
   pathTransition('#futurePath', null, true);
   // change slides (caption)
   document.getElementById('flood-slide-3').className = 'hidden';

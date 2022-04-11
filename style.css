@@ -181,6 +181,10 @@ h1, h2, h3 {
 	color: black;
 }
 
+.mid-div {
+	width: 700px;
+}
+
 .vis-vid {
 	width: 75vw;
 }
