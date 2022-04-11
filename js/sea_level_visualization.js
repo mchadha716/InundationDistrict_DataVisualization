@@ -58,7 +58,8 @@ const drawFloodChart = () => {
 
       // x-axis
       svg.append("g")
-        .style("font-size",20)
+        .attr('stroke-width', 2.5)
+        .style("font-size",24)
         .attr("transform", `translate(0, ${height})`)
         .call(d3.axisBottom(x));
       
@@ -69,7 +70,7 @@ const drawFloodChart = () => {
         .attr("x", width)
         .attr("y", height - 6)
         .text("Year")
-        .style("font-size",26);
+        .style("font-size",28);
 
       // y-scale
       const y = d3.scaleLinear()
@@ -78,7 +79,8 @@ const drawFloodChart = () => {
 
       // y-axis
       svg.append("g")
-        .style("font-size",20)
+        .style("font-size",24)
+        .attr('stroke-width', 2.5)
         .call(d3.axisLeft(y));
       
       // y-axis label
@@ -89,7 +91,7 @@ const drawFloodChart = () => {
           .attr("dy", ".75em")
           .attr("transform", "rotate(-90)")
           .text("Inches of Sea Level Rise")
-          .style("font-size",26);
+          .style("font-size",28);
 
       // chart title
       svg.append("text")
@@ -116,14 +118,14 @@ const drawFloodChart = () => {
         .attr("x", 1175)
         .attr("y", 30)
         .text("High")
-        .style("font-size", 24)
+        .style("font-size", 26)
         .attr("alignment-baseline","middle")
         .attr('id', 'highLabel');
       svg.append("text")
         .attr("x", 1175)
         .attr("y", 55)
         .text("Intermediate")
-        .style("font-size", 24)
+        .style("font-size", 26)
         .attr("alignment-baseline","middle")
         .attr('id', 'intLabel');
 
@@ -132,7 +134,7 @@ const drawFloodChart = () => {
         .attr("x", 1085)
         .attr("y", 707)
         .text("Development Code")
-        .style("font-size", 24)
+        .style("font-size", 26)
         .attr("alignment-baseline","middle")
         .attr('id', 'intLabel');
 

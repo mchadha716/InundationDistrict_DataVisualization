@@ -146,7 +146,7 @@ svg2.append("text")
   .attr("x", width2/2)
   .attr("y", height2 + 60)
   .text("Decade")
-  .style("font-size",26)
+  .style("font-size",28)
   .attr('id', 'xlabel2');
 
 svg2.append("g")
@@ -172,7 +172,7 @@ svg2.append("text")
   .attr("dy", ".75em")
   .attr("transform", "rotate(-90)")
   .text("Average Inches of Precipitation Per Year")
-  .style("font-size",26)
+  .style("font-size",28)
   .attr('id', 'ylabel2');
 
 
