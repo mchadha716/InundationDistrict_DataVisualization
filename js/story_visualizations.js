@@ -8,55 +8,46 @@ const setPrecipitation = val => {
   precipitation = val;
 }
 
-let firstVisLoaded = false;
-
-const setFirstVisLoaded = val => {
-  firstVisLoaded = val;
-}
-
-let alreadyShown = false;
-
-const setAlreadyShown = val => {
-  alreadyShown = val;
-}
 
 // variable to hold number of clicks on Next button
-let floodSlide = 0;
+let floodSlide = 1;
 
 const setFloodSlide = val => {
   floodSlide = val;
 }
 
-let precSlide = 0;
+let precSlide = 1;
 
 const setPrecSlide = val => {
   precSlide = val;
 }
 
+const switchStory = prec => {
+  setPrecipitation(prec);
+  if (precipitation) {
+    document.getElementById('prec-text').className = 'storyboard-section';
+    document.getElementById('prec-content').className = 'storyboard-section';
+    document.getElementById('flooding-text').className = 'hidden';
+    document.getElementById('flooding-content').className = 'hidden';
+    document.getElementById('prec-text').scrollIntoView();
+  }
+  else {
+    document.getElementById('prec-text').className = 'hidden';
+    document.getElementById('prec-content').className = 'hidden';
+    document.getElementById('flooding-text').className = 'storyboard-section';
+    document.getElementById('flooding-content').className = 'storyboard-section';
+    document.getElementById('flooding-text').scrollIntoView();
+  }
+}
+
 const showPrecipitation = () => {
-  document.getElementById('prec-text').className = 'storyboard-section';
-  document.getElementById('prec-content').className = 'storyboard-section';
-  document.getElementById('flooding-text').className = 'hidden';
-  document.getElementById('flooding-content').className = 'hidden';
-  document.getElementById('prec-text').scrollIntoView();
+  document.getElementById('prec-content').scrollIntoView();
   drawPrecipitationChart();
-  setFirstVisLoaded(true);
-  setPrecipitation(true);
-  setPrecSlide(1);
 }
 
 const showFlooding = () => {
-  document.getElementById('prec-text').className = 'hidden';
-  document.getElementById('prec-content').className = 'hidden';
-  document.getElementById('flooding-text').className = 'storyboard-section';
-  document.getElementById('flooding-content').className = 'storyboard-section';
-  document.getElementById('flooding-text').scrollIntoView();
-  setFirstVisLoaded(true);
-  setPrecipitation(false);
-  setFloodSlide(1);
-  if (!alreadyShown) {
-    drawChart();
-  }
+  document.getElementById('flooding-content').scrollIntoView();
+  drawChart();
 }
 
 // dimensions for SVG canvas
@@ -486,23 +477,13 @@ const drawNewChart = () => {
 
 // function for first click of next button
 const firstFloodClick = () => {
-  if (firstVisLoaded) {
+  showFlooding();
     // extend line chart
     chartExtension();
 
     // change slides (caption)
     document.getElementById('flood-slide-1').className = 'hidden';
     document.getElementById('flood-slide-2').className = '';
-  }
-  else {
-    showFlooding();
-    // extend line chart
-    chartExtension();
-
-    // change slides (caption)
-    document.getElementById('flood-slide-1').className = 'hidden';
-    document.getElementById('flood-slide-2').className = '';
-  }
 
 }
 
@@ -513,8 +494,6 @@ const secondFloodClick = () => {
 
   // draw new chart
   drawNewChart();
-
-  setAlreadyShown(true);
 
   // change slides (caption)
 
@@ -533,13 +512,14 @@ const firstClick = () => {
     document.getElementById('next').className = 'hidden';
     document.getElementById('continue').className = 'continue-button';
     extendPrecipitationChart();
-  if (!firstVisLoaded) {
-    showPrecipitation();
-  }
 }
 
-const firstBackClick = () => {
-  document.getElementById('choice-section').scrollIntoView();
+const firstPrecBackClick = () => {
+  document.getElementById('prec-text').scrollIntoView();
+}
+
+const firstFloodBackClick = () => {
+  document.getElementById('flooding-text').scrollIntoView();
 }
 
 const secondPrecBackClick = () => {
@@ -603,12 +583,12 @@ const updateChart = () => {
 
 const goBack = () => {
   if (precipitation) {
-    precSlide == 1 && firstBackClick();
+    precSlide == 1 && firstPrecBackClick();
     precSlide == 2 && secondPrecBackClick();
     setPrecSlide(precSlide - 1);
   }
   else {
-    floodSlide == 1 && firstBackClick();
+    floodSlide == 1 && firstFloodBackClick();
     floodSlide == 2 && secondFloodBackClick();
     floodSlide == 3 && thirdFloodBackClick();
     setFloodSlide(floodSlide - 1);
@@ -616,7 +596,7 @@ const goBack = () => {
 }
 
 const moveOn = () => {
-  document.getElementById('future-section').scrollIntoView();
+  document.getElementById('future-transition').scrollIntoView();
 }
 
 

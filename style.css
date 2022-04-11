@@ -56,17 +56,9 @@ h1, h2, h3 {
   display: flex;
   justify-content: center;
   align-items: center;
-	height: 100%;
-}
-
-.final-section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-	height: 100%;
 	flex-direction: column;
+	height: 100%;
 }
-
 .centered-text {
 	text-align: center;
 }

@@ -37,18 +37,22 @@
         <h1 class='storyboard-h1'>RISING SEA LEVELS</h1>
       </div>
     </div>
-    <div class='storyboard-section'>
+    <div class='storyboard-section' id='intro-section-1'>
       <div class='centered-section'>
+        <div>
           <p class='text-section'>
             Ocean levels are rising at unrpecedented rates. 
             Due to byproducts of climate change like greenhouse gases, 
             melting glaciers, and thermal expansion, experts worry that rising sea levels will 
             <strong >"wreak havoc on coastal cities across the world."</strong>
           </p>
+          <button class='button' onclick="document.getElementById('intro-section-2').scrollIntoView();">Next</button>
+        </div>
       </div>
     </div>
-    <div class='storyboard-section'>
+    <div class='storyboard-section' id='intro-section-2'>
       <div class='centered-section'>
+          <div>
           <p class="text-section">
             As a coastal city, Boston experiences the consequences of changes in sea level. Though the city already
             experiences regular flooding, Boston is predicted to face up to <strong>1.5 feet of sea-level rise
@@ -59,35 +63,50 @@
             as a result of future flooding. The following data visualizations outline how changes in sea level
             will impact flooding in Seaport.
           </p>
-      </div>
+          <button class='back-button' onclick="document.getElementById('intro-section-1').scrollIntoView();">Back</button>
+          <button class='button' onclick="document.getElementById('seaport-vis-1').scrollIntoView();">Next</button>
+        </div>
+        </div>
     </div>
-  <div class='storyboard-section'>
+  <div class='storyboard-section' id='seaport-vis-1'>
     <div class='centered-section'>
+      <div>
       <video controls width='100%' class='vis-vid'>
         <source src='img/seaport_properties_flooding.mp4' type='video/mp4'>
         <p>Your browser doesn't support HTML5 video, sorry!</p>
       </video>
+      <button class='back-button' onclick="document.getElementById('intro-section-2').scrollIntoView();">Back</button>
+      <button class='button' onclick="document.getElementById('seaport-vis-2').scrollIntoView();">Next</button>
+      </div>
     </div>
     </div>
-    <div class='storyboard-section'>
+    <div class='storyboard-section' id='seaport-vis-2'>
     <div class='centered-section'>
+      <div>
       <video controls width='100%' class='vis-vid'>
         <source src='img/seaport_roads_flooding.mp4' type='video/mp4'>
         <p>Your browser doesn't support HTML5 video, sorry!</p>
       </video>
+      <button class='back-button' onclick="document.getElementById('seaport-vis-1').scrollIntoView();">Back</button>
+      <button class='button' onclick="document.getElementById('transition-text').scrollIntoView();">Next</button>
+    </div>
     </div>
   </div>
-  <div class='storyboard-section'>
+  <div class='storyboard-section' id='transition-text'>
     <div class='centered-section'>
+      <div>
         <p class="text-section">
           Changes in sea level can affect many aspects of a city's ecosystem. Two
           common side effects of sea-level rise that may impact the Seaport neighborhood
-          are increased flooding and increased precipitation.
+          are increased <strong>flooding</strong> and <strong>heavy precipitation.</strong>
           <br/>
           <br/>
           Below are visualizations that outline the past, present and future of these
           climate patterns in Boston.
         </p>
+        <button class='back-button' onclick="document.getElementById('seaport-vis-2').scrollIntoView();">Back</button>
+        <button class='button' onclick="document.getElementById('choice-section').scrollIntoView();">Next</button>
+      </div>
     </div>
   </div>
     <div class='storyboard-section' id='choice-section'>
@@ -95,14 +114,15 @@
         <div>
           <h2 class='storyboard-h2'>Which trend would you like to explore?</h2>
           <div class='button-holder'>
-            <button class='question-button' onClick="showFlooding()">Flooding</button>
-            <button class='question-button' onClick="showPrecipitation()">Precipitation</button>
+            <button class='question-button' onClick="switchStory(false)">Flooding</button>
+            <button class='question-button' onClick="switchStory(true)">Precipitation</button>
           </div>
         </div>
       </div>
     </div>
     <div class='hidden' id="prec-text">
       <div class='centered-section'>
+        <div>
         <p class='text-section'>
           Since the 1950s, heavy precipitation has become more common around the world. 
           As the planet continues to warm, this trend will continue, because warmer air can hold more water vapor.
@@ -114,6 +134,9 @@
           In urban areas such as Boston, floods have the ability to devastate roads and infrastructure, 
           harm human health, and overwhelm sewer systems. 
         </p>
+        <button class='back-button' onclick="document.getElementById('transition-text').scrollIntoView();">Back</button>
+        <button class='button' onclick="showPrecipitation()">Next</button>
+        </div>
       </div>
     </div>
     <div class='hidden' id='prec-content'>
@@ -159,6 +182,7 @@
     </div>
     <div class='storyboard-section' id="flooding-text">
       <div class='centered-section'>
+        <div>
           <p class='text-section'>
             Floods are among the most common natural disasters in the United States. They can cause
             loss of human life, destruction of property and an increase in waterborne diseases. As 
@@ -170,7 +194,10 @@
             sea-level rise within the next 100 years. Boston has historically surpassed national averages
             in annual flooding. Studies show this trend is likely to continue.
           </p>
-      </div>
+          <button class='back-button' onclick="document.getElementById('transition-text').scrollIntoView();">Back</button>
+          <button class='button' onclick="showFlooding()">Next</button>
+        </div>
+        </div>
     </div>
     <div class='storyboard-section' id='flooding-content'>
       <div class='vis-section'>
@@ -222,12 +249,16 @@
         </div>
       </div>
     </div>
-    <div class='storyboard-section'>
+    <div class='storyboard-section' id='future-transition'>
       <div class='centered-section'>
+        <div>
           <p class="text-section">
             Flooding and heavy precipitation events caused by rising sea levels have plagued the Boston area.
             Predictions show these extreme weather events will only worsen in years to come.
           </p>
+          <button class='back-button' onclick="document.getElementById('flooding-content').scrollIntoView();">Back</button>
+          <button class='button' onclick="document.getElementById('future-section').scrollIntoView();">Next</button>
+        </div>
       </div>
     </div>
     <div class='storyboard-section' id='future-section'>
@@ -238,19 +269,25 @@
         </div>
       </div>
     </div>
-    <div class='storyboard-section'>
-      <div class='centered-section'>
-        <svg id='vis-svg-5' preserveAspectRatio='xMidYMid meet' class='svg-3' viewBox='0 0 1400 1100' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
-        </svg>
-      </div>
-    </div>
     <div class='storyboard-section' id="future-chart">
       <div class='centered-section'>
+        <div>
+        <svg id='vis-svg-5' preserveAspectRatio='xMidYMid meet' class='svg-3' viewBox='0 0 1400 1100' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
+        </svg>
+        <button class='back-button' onclick="document.getElementById('future-transition').scrollIntoView();">Back</button>
+        <button class='button' onclick="document.getElementById('future-text').scrollIntoView();">Next</button>
+        </div>
+      </div>
+    </div>
+    <div class='storyboard-section' id="future-text">
+      <div class='centered-section'>
+        <div>
         <p class='text-section'>
           The National Oceanic and Atmospheric Administration, NOAA, has found that even by intermediate 
           estimates, sea levels in Boston will rise by over a foot by 2050. High estimates are more severe 
           and predict 21.3 inches of sea-level rise by 2050. These projections only become
-          more drastic with time.  
+          more drastic with time. Both of these estimates are far above the city code for development, which defines
+          what degree of potential flood risk is safe for infrastructure development.
           <br/>
           <br/>
           Boston endures worse high-tide flooding than most cities in the United States. By NOAA's estimates,
@@ -260,6 +297,8 @@
           We hope that this project will increase the Boston community's awareness of the problem, as well as
           motivate further research on the effect of rising sea levels in Boston.
         </p>
+        <button class='back-button' onclick="document.getElementById('future-chart').scrollIntoView();">Back</button>
+      </div>
       </div>
     </div>
   </div>
