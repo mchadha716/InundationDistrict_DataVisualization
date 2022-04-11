@@ -8,6 +8,11 @@ const setPrecipitation = val => {
   precipitation = val;
 }
 
+let alreadyShown = false;
+
+const setAlreadyShown = val => {
+  alreadyShown = val;
+}
 
 // variable to hold number of clicks on Next button
 let floodSlide = 1;
@@ -41,12 +46,18 @@ const switchStory = prec => {
 }
 
 const showPrecipitation = () => {
+  setPrecSlide(1);
   document.getElementById('prec-content').scrollIntoView();
   drawPrecipitationChart();
 }
 
 const showFlooding = () => {
+  setFloodSlide(1);
+  if (alreadyShown) {
+    thirdFloodBackClick(true);
+  }
   document.getElementById('flooding-content').scrollIntoView();
+  document.getElementById('flood-slide-1').className = '';
   drawChart();
 }
 
@@ -224,7 +235,7 @@ svg.append("text")
 // makes paths look like they're drawn on the page
 const pathTransition = (pathId, transition, remove) => {
   // select path by id
-  const path = d3.select(pathId);
+  const path = d3.selectAll(pathId);
 
   // determine length of path
   const pathLength = path.node().getTotalLength();
@@ -297,6 +308,7 @@ const drawChart = () => {
 
     }
   )
+  setAlreadyShown(true);
 };
 
 // function to draw paths for the rest of the data for the first visualization
@@ -367,18 +379,8 @@ const removeLineChart = () => {
   // remove each path
   pathTransition('#boston2', transition1, true);
   pathTransition('#national2', transition1, true);
-
-  const bostonPathLength = d3.selectAll('#boston').node().getTotalLength();
-  d3.selectAll('#boston')
-    .transition(transition2)
-    .attr("stroke-dasharray", bostonPathLength)
-    .attr("stroke-dashoffset", bostonPathLength);
-
-  const natPathLength = d3.selectAll('#national').node().getTotalLength();
-  d3.selectAll('#national')
-    .transition(transition2)
-    .attr("stroke-dasharray", natPathLength)
-    .attr("stroke-dashoffset", natPathLength);
+  pathTransition('#boston', transition2, true);
+  pathTransition('#national', transition2, true);
 
   // remove axes, labels, titles and national part of legend
   d3.select('#xlabel').classed('hidden', true);
@@ -493,7 +495,6 @@ const drawNewChart = () => {
 
 // function for first click of next button
 const firstFloodClick = () => {
-    showFlooding();
     // extend line chart
     chartExtension();
 
@@ -520,8 +521,7 @@ const secondFloodClick = () => {
 }
 
 // function for first click of next button
-const firstClick = () => {
-
+const firstPrecClick = () => {
     // change slides (caption)
     document.getElementById('prec-slide-1').className = 'hidden';
     document.getElementById('prec-slide-2').className = '';
@@ -532,6 +532,11 @@ const firstClick = () => {
 
 const firstPrecBackClick = () => {
   document.getElementById('prec-text').scrollIntoView();
+  svg2.selectAll('#firstBars')
+          .transition()
+          .duration(2500)
+          .attr("y", function() { return 1100; })
+          .attr("height", function() { return 0; })
 }
 
 const firstFloodBackClick = () => {
@@ -575,7 +580,7 @@ const secondFloodBackClick = () => {
     document.getElementById('flood-slide-1').className = '';
 }
 
-const thirdFloodBackClick = () => {
+const thirdFloodBackClick = resetting => {
   d3.select('#xlabel').classed('hidden', false);
   d3.select('#xaxis').classed('hidden', false);
   d3.select('#ylabel').classed('hidden', false);
@@ -583,20 +588,33 @@ const thirdFloodBackClick = () => {
   d3.select('#natCirc').classed('hidden', false);
   d3.select('#natLabel').classed('hidden', false);
   d3.select('#title1').classed('hidden', false);
-  d3.select('#futurexaxis').classed('hidden', true);
-  d3.select('#futurexlabel').classed('hidden', true);
-  d3.select('#futureyaxis').classed('hidden', true);
-  d3.select('#futureylabel').classed('hidden', true);
-  d3.select('#futuretitle').classed('hidden', true);
+  d3.selectAll('#futurexaxis').classed('hidden', true);
+  d3.selectAll('#futurexlabel').classed('hidden', true);
+  d3.selectAll('#futureyaxis').classed('hidden', true);
+  d3.selectAll('#futureylabel').classed('hidden', true);
+  d3.selectAll('#futuretitle').classed('hidden', true);
   document.getElementById('continue-flood').className = 'hidden';
   document.getElementById('next-flood').className = 'button';
-  pathTransition('#futurePath', null, true);
-  // change slides (caption)
   document.getElementById('flood-slide-3').className = 'hidden';
-  document.getElementById('flood-slide-2').className = '';
-
-  drawChart();
-  chartExtension();
+  const firstTransition = d3.transition()
+      .delay(2700)
+      .ease(d3.easeSin)
+      .duration(2500);
+  pathTransition('#boston', firstTransition, false);
+  pathTransition('#national', firstTransition, false);
+  if (resetting) {
+    d3.selectAll('#futurePath').classed('hidden', true);
+  }
+  else {
+    const secondTransition = d3.transition()
+      .delay(5200)
+      .ease(d3.easeSin)
+      .duration(2500);
+    pathTransition('#boston2', secondTransition, false);
+    pathTransition('#national2', secondTransition, false);
+    pathTransition('#futurePath', null, true);
+    document.getElementById('flood-slide-2').className = '';
+  }
 }
 
 
@@ -604,7 +622,7 @@ const thirdFloodBackClick = () => {
 const updateChart = () => {
   if (precipitation) {
     // respond to click with appropriate action
-    precSlide == 1 && firstClick();
+    precSlide == 1 && firstPrecClick();
     setPrecSlide(precSlide + 1);
   }
   else {
@@ -623,7 +641,7 @@ const goBack = () => {
   else {
     floodSlide == 1 && firstFloodBackClick();
     floodSlide == 2 && secondFloodBackClick();
-    floodSlide == 3 && thirdFloodBackClick();
+    floodSlide == 3 && thirdFloodBackClick(false);
     setFloodSlide(floodSlide - 1);
   }
 }
@@ -652,9 +670,10 @@ const drawPrecipitationChart = () => {
             .attr("height", function() { return 0; })
             .attr("y", function() { return 1100; })
             .attr("fill", "#003366")
+            .attr('id', 'firstBars')
             
             
-        svg2.selectAll('rect')
+        svg2.selectAll('#firstBars')
           .transition()
           .delay(100)
           .duration(2500)
