@@ -133,7 +133,19 @@ h1, h2, h3 {
 	background: white;
 	font-size: 18px;
 	float: right;
-	margin-top: 15px;
+	margin-top: -80px;
+}
+
+.view-button {
+	border-radius: 35px;
+	padding: 10px 15px;
+	border: none;
+	color: #161616;
+	background: white;
+	font-size: 18px;
+	float: right;
+	margin-top: -80px;
+	margin-right: 130px;
 }
 
 .continue-button {
@@ -144,7 +156,7 @@ h1, h2, h3 {
 	background: white;
 	font-size: 18px;
 	float: right;
-	margin-top: 15px;
+	margin-top: -80px;
 	margin-right: 10px;
 }
 
@@ -156,7 +168,7 @@ h1, h2, h3 {
 	background: white;
 	font-size: 18px;
 	float: left;
-	margin-top: 15px;
+	margin-top: -80px;
 }
 
 
@@ -180,9 +192,10 @@ h1, h2, h3 {
 
 .svg-2 {
 	background-color: #f4f1f0;
-	height: 630px;
+	height: 590px;
 	width: 550px;
 	color: black;
+	margin-top: -60px;
 }
 
 .svg-3 {
@@ -190,20 +203,19 @@ h1, h2, h3 {
 	height: 550px;
 	width: 700px;
 	color: black;
+	margin-top: -50px;
 }
 
-.mid-div {
-	width: 700px;
-}
 
 .vis-vid {
-	width: 75vw;
+	width: 970px;
 }
 
 .vis-caption {
   width: 50%;
   height: 100%;
 	padding: 0 15px;
+	margin-top: -60px;
 }
 
 .hidden {

@@ -516,6 +516,7 @@ const secondFloodClick = () => {
 
   document.getElementById('next-flood').className = 'hidden';
   document.getElementById('continue-flood').className = 'continue-button';
+  document.getElementById('view-prec').className = 'view-button';
   document.getElementById('flood-slide-2').className = 'hidden';
   document.getElementById('flood-slide-3').className = '';
 }
@@ -527,6 +528,7 @@ const firstPrecClick = () => {
     document.getElementById('prec-slide-2').className = '';
     document.getElementById('next').className = 'hidden';
     document.getElementById('continue').className = 'continue-button';
+    document.getElementById('view-flooding').className = 'view-button';
     extendPrecipitationChart();
 }
 

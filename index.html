@@ -40,20 +40,17 @@
     </div>
     <div class='storyboard-section' id='intro-section-1'>
       <div class='centered-section'>
-        <div>
           <p class='text-section'>
             Ocean levels are rising at unrpecedented rates. 
             Due to byproducts of climate change like greenhouse gases, 
             melting glaciers, and thermal expansion, experts worry that rising sea levels will 
             <strong >"wreak havoc on coastal cities across the world."</strong>
           </p>
-          <button class='button' onclick="document.getElementById('intro-section-2').scrollIntoView();">Next</button>
-        </div>
       </div>
+      <button class='button' onclick="document.getElementById('intro-section-2').scrollIntoView();">Next</button>
     </div>
     <div class='storyboard-section' id='intro-section-2'>
       <div class='centered-section'>
-          <div>
           <p class="text-section">
             As a coastal city, Boston experiences the consequences of changes in sea level. Though the city already
             experiences regular flooding, Boston is predicted to face up to <strong>1.5 feet of sea-level rise
@@ -64,38 +61,32 @@
             as a result of future flooding. The following data visualizations outline how changes in sea level
             will impact flooding in Seaport.
           </p>
-          <button class='back-button' onclick="document.getElementById('intro-section-1').scrollIntoView();">Back</button>
-          <button class='button' onclick="document.getElementById('seaport-vis-1').scrollIntoView();">Next</button>
-        </div>
-        </div>
+      </div>
+      <button class='back-button' onclick="document.getElementById('intro-section-1').scrollIntoView();">Back</button>
+      <button class='button' onclick="document.getElementById('seaport-vis-1').scrollIntoView();">Next</button>
     </div>
   <div class='storyboard-section' id='seaport-vis-1'>
     <div class='centered-section'>
-      <div>
       <video controls width='100%' class='vis-vid'>
         <source src='img/seaport_properties_flooding.mp4' type='video/mp4'>
         <p>Your browser doesn't support HTML5 video, sorry!</p>
       </video>
-      <button class='back-button' onclick="document.getElementById('intro-section-2').scrollIntoView();">Back</button>
-      <button class='button' onclick="document.getElementById('seaport-vis-2').scrollIntoView();">Next</button>
-      </div>
     </div>
-    </div>
-    <div class='storyboard-section' id='seaport-vis-2'>
+    <button class='back-button' onclick="document.getElementById('intro-section-2').scrollIntoView();">Back</button>
+    <button class='button' onclick="document.getElementById('seaport-vis-2').scrollIntoView();">Next</button>
+  </div>
+  <div class='storyboard-section' id='seaport-vis-2'>
     <div class='centered-section'>
-      <div>
       <video controls width='100%' class='vis-vid'>
         <source src='img/seaport_roads_flooding.mp4' type='video/mp4'>
         <p>Your browser doesn't support HTML5 video, sorry!</p>
       </video>
-      <button class='back-button' onclick="document.getElementById('seaport-vis-1').scrollIntoView();">Back</button>
-      <button class='button' onclick="document.getElementById('transition-text').scrollIntoView();">Next</button>
     </div>
-    </div>
+    <button class='back-button' onclick="document.getElementById('seaport-vis-1').scrollIntoView();">Back</button>
+    <button class='button' onclick="document.getElementById('transition-text').scrollIntoView();">Next</button>
   </div>
   <div class='storyboard-section' id='transition-text'>
     <div class='centered-section'>
-      <div>
         <p class="text-section">
           Changes in sea level can affect many aspects of a city's ecosystem. Two
           common side effects of sea-level rise that may impact the Seaport neighborhood
@@ -105,10 +96,9 @@
           Below are visualizations that outline the past, present and future of these
           climate patterns in Boston.
         </p>
-        <button class='back-button' onclick="document.getElementById('seaport-vis-2').scrollIntoView();">Back</button>
-        <button class='button' onclick="document.getElementById('choice-section').scrollIntoView();">Next</button>
-      </div>
     </div>
+    <button class='back-button' onclick="document.getElementById('seaport-vis-2').scrollIntoView();">Back</button>
+    <button class='button' onclick="document.getElementById('choice-section').scrollIntoView();">Next</button>
   </div>
     <div class='storyboard-section' id='choice-section'>
       <div class='centered-section'>
@@ -123,7 +113,6 @@
     </div>
     <div class='hidden' id="prec-text">
       <div class='centered-section'>
-        <div>
         <p class='text-section'>
           Since the 1950s, heavy precipitation has become more common around the world. 
           As the planet continues to warm, this trend will continue, because warmer air can hold more water vapor.
@@ -135,18 +124,15 @@
           In urban areas such as Boston, floods have the ability to devastate roads and infrastructure, 
           harm human health, and overwhelm sewer systems. 
         </p>
-        <button class='back-button' onclick="document.getElementById('transition-text').scrollIntoView();">Back</button>
-        <button class='button' onclick="showPrecipitation()">Next</button>
-        </div>
       </div>
+      <button class='back-button' onclick="document.getElementById('transition-text').scrollIntoView();">Back</button>
+      <button class='button' onclick="showPrecipitation()">Next</button>
     </div>
     <div class='hidden' id='prec-content'>
+      <div class="centered-section">
       <div class='vis-section'>
-        <div class='vis-holder'>
-          <!-- Change viewbox to whatever you want, e.g., '0 0 1000 6000' This determines your aspect ratio and coordinate system -->
           <svg id='vis-svg-4' preserveAspectRatio='xMidYMid meet' class='svg-2' viewBox='0 0 1100 1260' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
           </svg>
-        </div>
         <div class='vis-caption'>
           <div id='prec-slide-1' >
             <h3 class='storyboard-h3' >1966-1996</h3>
@@ -173,17 +159,17 @@
               precipitation result from an increase of greenhouse gasses caused by human activity and 
               variable surface temperatures in the Atlantic Ocean. 
             </p>
-            <button class='button' id='view-flooding' onclick='switchStory(false)'>View Flooding</button>
           </div>
-          <button class='back-button' id='back' onclick='goBack()'>Back</button>
-          <button class='button' id='next' onclick='updateChart()'>Next</button>
-          <button class='hidden' id='continue' onclick='moveOn()'>Continue</button>
         </div>
       </div>
     </div>
+      <button class='back-button' id='back' onclick='goBack()'>Back</button>
+      <button class='button' id='next' onclick='updateChart()'>Next</button>
+      <button class='hidden' id='view-flooding' onclick='switchStory(false)'>View Flooding</button>
+      <button class='hidden' id='continue' onclick='moveOn()'>Continue</button>
+    </div>
     <div class='storyboard-section' id="flooding-text">
       <div class='centered-section'>
-        <div>
           <p class='text-section'>
             Floods are among the most common natural disasters in the United States. They can cause
             loss of human life, destruction of property and an increase in waterborne diseases. As 
@@ -195,18 +181,15 @@
             sea-level rise within the next 100 years. Boston has historically surpassed national averages
             in annual flooding. Studies show this trend is likely to continue.
           </p>
-          <button class='back-button' onclick="document.getElementById('transition-text').scrollIntoView();">Back</button>
-          <button class='button' onclick="showFlooding()">Next</button>
-        </div>
-        </div>
+      </div>
+      <button class='back-button' onclick="document.getElementById('transition-text').scrollIntoView();">Back</button>
+      <button class='button' onclick="showFlooding()">Next</button>
     </div>
     <div class='storyboard-section' id='flooding-content'>
+      <div class="centered-section">
       <div class='vis-section'>
-        <div class='vis-holder'>
-          <!-- Change viewbox to whatever you want, e.g., '0 0 1000 6000' This determines your aspect ratio and coordinate system -->
           <svg id='vis-svg-3' preserveAspectRatio='xMidYMid meet' class='svg-2' viewBox='0 0 1100 1260' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
           </svg>
-        </div>
         <div class='vis-caption'>
           <div id='flood-slide-1' >
             <h3 class='storyboard-h3'>1920-1990</h3>
@@ -242,25 +225,24 @@
               Such a drastic rise in flooding “endangers crucial infrastructure in Boston, including waste and 
               stormwater systems, MBTA lines, and roads.” 
             </p>
-            <button class='button' id='view-prec' onclick='switchStory(true)'>View Precipitation</button>
           </div>
-          <button class='back-button' id='back-flood' onclick='goBack()'>Back</button>
-          <button class='button' id='next-flood' onclick='updateChart()'>Next</button>
-          <button class='hidden' id='continue-flood' onclick='moveOn()'>Continue</button>
         </div>
       </div>
+      </div>
+      <button class='back-button' id='back-flood' onclick='goBack()'>Back</button>
+      <button class='button' id='next-flood' onclick='updateChart()'>Next</button>
+      <button class='hidden' id='view-prec' onclick='switchStory(true)'>View Precipitation</button>
+      <button class='hidden' id='continue-flood' onclick='moveOn()'>Continue</button>
     </div>
     <div class='storyboard-section' id='future-transition'>
       <div class='centered-section'>
-        <div>
           <p class="text-section">
             Flooding and heavy precipitation events caused by rising sea levels have plagued the Boston area.
             Predictions show these extreme weather events will only worsen in years to come.
           </p>
-          <button class='back-button' onclick="document.getElementById('choice-section').scrollIntoView();">Back</button>
-          <button class='button' onclick="document.getElementById('future-section').scrollIntoView();">Next</button>
-        </div>
       </div>
+      <button class='back-button' onclick="document.getElementById('choice-section').scrollIntoView();">Back</button>
+      <button class='button' onclick="document.getElementById('future-section').scrollIntoView();">Next</button>
     </div>
     <div class='storyboard-section' id='future-section'>
       <div class='centered-section'>
@@ -272,17 +254,14 @@
     </div>
     <div class='storyboard-section' id="future-chart">
       <div class='centered-section'>
-        <div class='mid-div'>
           <svg id='vis-svg-5' preserveAspectRatio='xMidYMid meet' class='svg-3' viewBox='0 0 1400 1100' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
           </svg>
-          <button class='back-button' onclick="document.getElementById('future-transition').scrollIntoView();">Back</button>
-          <button class='button' onclick="document.getElementById('future-text').scrollIntoView();">Next</button>
-        </div>
       </div>
+      <button class='back-button' onclick="document.getElementById('future-transition').scrollIntoView();">Back</button>
+      <button class='button' onclick="document.getElementById('future-text').scrollIntoView();">Next</button>
     </div>
     <div class='storyboard-section' id="future-text">
       <div class='centered-section'>
-        <div>
         <p class='text-section'>
           The National Oceanic and Atmospheric Administration, NOAA, has found that even by intermediate 
           estimates, sea levels in Boston will rise by over a foot by 2050. High estimates are more severe 
@@ -298,9 +277,8 @@
           We hope that this project will increase the Boston community's awareness of the problem, as well as
           motivate further research on the effect of rising sea levels in Boston.
         </p>
-        <button class='back-button' onclick="document.getElementById('future-chart').scrollIntoView();">Back</button>
       </div>
-      </div>
+      <button class='back-button' onclick="document.getElementById('future-chart').scrollIntoView();">Back</button>
     </div>
   </div>
 
