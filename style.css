@@ -60,14 +60,9 @@ h1, h2, h3 {
 	flex-direction: column;
 	height: 100%;
 }
+
 .centered-text {
 	text-align: center;
-}
-
-.small-text-section {
-  width: 75%;
-	padding: 10px 0;
-	margin: auto;
 }
 
 .vis-section {
@@ -220,6 +215,51 @@ h1, h2, h3 {
 
 .hidden {
 	display: none;
+}
+
+@media (max-width: 750px) {
+	body {
+		font-size: 17px;
+	}
+
+	.text-section {
+		width: 100%;
+	}
+	.vis-vid {
+		width: 100%;
+	}
+	.question-button {
+		padding: 10px 20px;
+		width: auto;
+		height: auto;
+		margin: 5px;
+	}
+	.vis-section {
+		flex-direction: column;
+		max-width: 100vw;
+	}
+	.vis-caption {
+		margin-top: 5px;
+		font-size: 15px;
+		width: 95%;
+		height: auto;
+		margin-bottom: 10px;
+	}
+	.vis-text {
+		margin: auto;
+		margin-bottom: none;
+	}
+	.storyboard-h3 {
+		font-size: 18px;
+	}
+	.svg-2 {
+		height: 340px;
+		width: auto;
+	}
+	.svg-3 {
+		height: auto;
+		width: 450px;
+	}
 }
 
 @media (orientation: landscape) {
