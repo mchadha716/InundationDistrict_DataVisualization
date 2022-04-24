@@ -45,6 +45,15 @@ const switchStory = prec => {
   }
 }
 
+const backToStory = () => {
+  if (precipitation) {
+    document.getElementById('prec-content').scrollIntoView();
+  }
+  else {
+    document.getElementById('flooding-content').scrollIntoView();
+  }
+}
+
 const showPrecipitation = () => {
   setPrecSlide(1);
   document.getElementById('prec-content').scrollIntoView();
