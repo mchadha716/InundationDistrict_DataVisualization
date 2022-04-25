@@ -2,33 +2,49 @@
 // we have multiple functions because of the story-telling aspects of our site, which is 
 // replacing certain elements of interactivity (aproved by Cody)
 
+// boolean variable: is the precipitation storyline being shown?
 let precipitation = false;
 
+// function to change precipitation boolean variablle
 const setPrecipitation = val => {
   precipitation = val;
 }
 
+// boolean variable: has the flooding storyline
+// already been shown? (helps with transition
+// between storylines)
 let alreadyShown = false;
 
+// sets alreadyShown to given val
 const setAlreadyShown = val => {
   alreadyShown = val;
 }
 
-// variable to hold number of clicks on Next button
+// variable tracks the current slide for the flood storyline
 let floodSlide = 1;
 
+// function to change floodSlide variablle
 const setFloodSlide = val => {
   floodSlide = val;
 }
 
+// variable tracks the current slide for the precipitation storyline
 let precSlide = 1;
 
+// function to change precSlide variablle
 const setPrecSlide = val => {
   precSlide = val;
 }
 
+// function to switch the storyline from prec to flood or vice versa
+// takes a boolean variable representing whether or not switching to
+// precipitation storyline
 const switchStory = prec => {
+  // set precipitation global variable to passed in variable
   setPrecipitation(prec);
+  // if precipitation is true, show all precipitation elements
+  // and hide all flooding elements
+  // scroll to precipitation storyline
   if (precipitation) {
     document.getElementById('prec-text').className = 'storyboard-section';
     document.getElementById('prec-content').className = 'storyboard-section';
@@ -36,6 +52,9 @@ const switchStory = prec => {
     document.getElementById('flooding-content').className = 'hidden';
     document.getElementById('prec-text').scrollIntoView();
   }
+  // if precipitation is false, show all flooding elements
+  // and hide all precipitation elements
+  // scroll to flooding storyline
   else {
     document.getElementById('prec-text').className = 'hidden';
     document.getElementById('prec-content').className = 'hidden';
@@ -45,6 +64,8 @@ const switchStory = prec => {
   }
 }
 
+// scrolls back to whichever storyline is currently being shown
+// when user clicks back button from transition text
 const backToStory = () => {
   if (precipitation) {
     document.getElementById('prec-content').scrollIntoView();
@@ -54,23 +75,35 @@ const backToStory = () => {
   }
 }
 
+// fucntion to show/scroll to precipitation graph and captions
+// when user clicks next button from precipitation text
 const showPrecipitation = () => {
+  // set precipitation slide to 1 in case it isn't already
   setPrecSlide(1);
   document.getElementById('prec-content').scrollIntoView();
+  // make bars appear on chart
   drawPrecipitationChart();
 }
 
+// fucntion to show/scroll to flooding graph and captions
+// when user clicks next button from flooding text
 const showFlooding = () => {
+  // set flooding slide to 1
   setFloodSlide(1);
+  document.getElementById('flooding-content').scrollIntoView();
+  // shown first flood slide, which might be hidden
+  document.getElementById('flood-slide-1').className = '';
+  // draw first set of lines on chart
+  drawChart();
+
+  // if storyline has already been shown, remove whatever is
+  // on the chart now
   if (alreadyShown) {
     thirdFloodBackClick(true);
   }
-  document.getElementById('flooding-content').scrollIntoView();
-  document.getElementById('flood-slide-1').className = '';
-  drawChart();
 }
 
-// dimensions for SVG canvas
+// dimensions for flooding SVG canvas
 let margin = {
   top: 60,
   left: 100,
@@ -80,6 +113,7 @@ let margin = {
 width = 1100 - margin.left - margin.right;
 height = 1260 - margin.top - margin.bottom;
 
+// dimensions for precipitation SVG canvas
 let margin2 = {
   top: 75,
   left: 80,
@@ -89,7 +123,7 @@ let margin2 = {
 width2 = 1100 - margin2.left - margin2.right;
 height2 = 1260 - margin2.top - margin2.bottom;
 
-// svg canvas for all visualizations appearing in this portion of the site
+// svg canvas for flooding visualization
 const svg = d3.select("#vis-svg-3")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -97,7 +131,7 @@ const svg = d3.select("#vis-svg-3")
   .append("g")
     .attr("transform",`translate(${margin.left},${margin.top})`);
 
-
+// svg canvas for precipitation visualization
 const svg2 = d3.select('#vis-svg-4')
   .append("svg")
     .attr("width", width2 + margin2.left + margin2.right)
@@ -105,14 +139,14 @@ const svg2 = d3.select('#vis-svg-4')
   .append("g")
     .attr("transform",`translate(${margin2.left},${margin2.top})`);
 
-// x-axis for the first visualizations/ first two slides of this portion of the story
+// x-axis for the first two flooding slides
 // domain/range so that data can appear in chunks
 // x-scale based on decade data
 const x = d3.scaleTime()
   .domain([d3.timeParse("%Y")(1920), d3.timeParse("%Y")(2010)])
   .range([ 0, width ]);
 
-// line/ticks for x-axis
+// line/ticks for first two slides x-axis
 svg.append("g")
   .style("font-size",24)
   .attr("stroke-width", 2.5)
@@ -120,7 +154,7 @@ svg.append("g")
     .call(d3.axisBottom(x))
     .attr('id', 'xaxis');
 
-// label for x-axis
+// label for first two slides x-axis
 svg.append("text")
   .attr("class", "xlabel")
   .attr("text-anchor", "end")
@@ -130,62 +164,21 @@ svg.append("text")
   .style("font-size",28)
   .attr('id', 'xlabel');
 
-// y-axis for first visualization
-// domain/range so that data can appear in chunks
+// y-axis for first two flood slides
+// domain/range set for whole dataset so that data can appear in chunks
 // y-scale based on number of flood days
 const y = d3.scaleLinear()
   .domain([0, 160])
   .range([ height, 0 ]);
 
-// line/ticks for y-axis
+// line/ticks for first two sllides y-axis
 svg.append("g")
   .attr("stroke-width", 2.5)
   .style("font-size",24)
   .call(d3.axisLeft(y))
   .attr('id', 'yaxis');
 
-const x2 = d3.scaleBand()
-  .range([ 0, width2 ])
-  .domain(['1966-1975', '1977-1986', '1987-1996', '1997-2006', '2007-2016'])
-  .padding(0.2);
-
-svg2.append("text")
-  .attr("class", "xlabel-2")
-  .attr("text-anchor", "middle")
-  .attr("x", width2/2)
-  .attr("y", height2 + 60)
-  .text("Decade")
-  .style("font-size",28)
-  .attr('id', 'xlabel2');
-
-svg2.append("g")
-  .attr("stroke-width", 2.5)
-  .style("font-size",24)
-  .attr("transform", `translate(0, ${height2})`)
-  .call(d3.axisBottom(x2));
-
-// Add Y axis
-const y2 = d3.scaleLinear()
-  .domain([25, 45])
-  .range([ height2, 0]);
-
-svg2.append("g")
-  .attr("stroke-width", 2.5)
-  .style("font-size",24)
-  .call(d3.axisLeft(y2));
-
-svg2.append("text")
-  .attr("class", "ylabel-2")
-  .attr("text-anchor", "end")
-  .attr("y", 6)
-  .attr("dy", ".75em")
-  .attr("transform", "rotate(-90)")
-  .text("Average Inches of Precipitation Per Year")
-  .style("font-size",28)
-  .attr('id', 'ylabel2');
-
-
-// label for y-axis
+// label for first two slides y-axis
 svg.append("text")
   .attr("class", "ylabel")
   .attr("text-anchor", "end")
@@ -196,7 +189,7 @@ svg.append("text")
   .style("font-size",28)
   .attr('id', 'ylabel');
 
-// title for first visualization
+// title for first two slides vis
 svg.append("text")
   .attr("x", width / 2 )
   .attr("y", -16)
@@ -204,14 +197,6 @@ svg.append("text")
   .style("font-size",32)
   .style("text-anchor", "middle")
   .attr('id', 'title1');
-
-svg2.append("text")
-  .attr("x", width2 / 2 )
-  .attr("y", -16)
-  .text("Heavy Precipitation in the Northeast")
-  .style("font-size",32)
-  .style("text-anchor", "middle")
-  .attr('id', 'title3');
 
 // legend for first visualization
 svg.append("circle")
@@ -241,7 +226,65 @@ svg.append("text")
   .attr("alignment-baseline","middle")
   .attr('id', 'natLabel');
 
+// x scale for precipitation visualization
+const x2 = d3.scaleBand()
+  .range([ 0, width2 ])
+  .domain(['1966-1975', '1977-1986', '1987-1996', '1997-2006', '2007-2016'])
+  .padding(0.2);
+
+// label for precipitation x-axis
+svg2.append("text")
+  .attr("class", "xlabel-2")
+  .attr("text-anchor", "middle")
+  .attr("x", width2/2)
+  .attr("y", height2 + 60)
+  .text("Decade")
+  .style("font-size",28)
+  .attr('id', 'xlabel2');
+
+// x-axis for precipitation visualization
+svg2.append("g")
+  .attr("stroke-width", 2.5)
+  .style("font-size",24)
+  .attr("transform", `translate(0, ${height2})`)
+  .call(d3.axisBottom(x2));
+
+// y scale for precipitation
+const y2 = d3.scaleLinear()
+  .domain([25, 45])
+  .range([ height2, 0]);
+
+// precipitation y-axis label
+svg2.append("g")
+  .attr("stroke-width", 2.5)
+  .style("font-size",24)
+  .call(d3.axisLeft(y2));
+
+// precipitation y-axis label
+svg2.append("text")
+  .attr("class", "ylabel-2")
+  .attr("text-anchor", "end")
+  .attr("y", 6)
+  .attr("dy", ".75em")
+  .attr("transform", "rotate(-90)")
+  .text("Average Inches of Precipitation Per Year")
+  .style("font-size",28)
+  .attr('id', 'ylabel2');
+
+// precipitation title
+svg2.append("text")
+  .attr("x", width2 / 2 )
+  .attr("y", -16)
+  .text("Heavy Precipitation in the Northeast")
+  .style("font-size",32)
+  .style("text-anchor", "middle")
+  .attr('id', 'title3');
+
 // makes paths look like they're drawn on the page
+// pathId: id of path being moved
+// transition: the D3 transition to be used
+// remove: boolean, is this path being removed from
+// the chart?
 const pathTransition = (pathId, transition, remove) => {
   // select path by id
   const path = d3.selectAll(pathId);
@@ -258,12 +301,17 @@ const pathTransition = (pathId, transition, remove) => {
 
   // use transition, path length and stroke-dash attributes to
   // make path appear as though it is being drawn
+
+  // if removing line, move dashoffset from whatever it is
+  // to the length of the path, so it does not appear on the 
+  // chart
   if(remove) {
     path
     .transition(transitionPath)
     .attr("stroke-dasharray", pathLength)
     .attr("stroke-dashoffset", pathLength);
   }
+  // if drawing line, move dashoffset to 0
   else {
     path
     .attr("stroke-dasharray", pathLength)
@@ -273,7 +321,7 @@ const pathTransition = (pathId, transition, remove) => {
   }
 }
 
-// function to draw the first stage of the first visualization
+// function to draw the first stage of the first flood visualization
 const drawChart = () => {
 
   // read in initial data
@@ -317,6 +365,7 @@ const drawChart = () => {
 
     }
   )
+  // set alreadyShown to true
   setAlreadyShown(true);
 };
 
@@ -502,7 +551,77 @@ const drawNewChart = () => {
   )
 }
 
-// function for first click of next button
+// function to draw the precipitation chart
+// as seen on the first precipitation slide
+const drawPrecipitationChart = () => {
+  // read in data
+  d3.csv("data/heavy_precipitation_1.csv",
+    function(d){
+      return { 
+        years : d.years, 
+        inches : d3.format(",.2f")(d.inches)
+      }
+    }).then( 
+      function(data) {
+        // draw bars, initially with height of 0
+        svg2.selectAll("mybar")
+          .data(data)
+          .enter()
+          .append("rect")
+            .attr("x", function(d) { return x2(d.years); })
+            .attr("width", x2.bandwidth())
+            .attr("height", function() { return 0; })
+            .attr("y", function() { return 1100; })
+            .attr("fill", "#003366")
+            .attr('id', 'firstBars')
+            
+        // use D3 tranisition to make bars grow to 
+        // appropriate heights according to data
+        svg2.selectAll('#firstBars')
+          .transition()
+          .delay(100)
+          .duration(2500)
+          .attr("y", function(d) { return y2(d.inches); })
+          .attr("height", function(d) { return height2 - y2(d.inches); })
+      }
+    )
+}
+
+// function to draw the rest of the precipitation chart
+// as seen on the second precipitation slide
+const extendPrecipitationChart = () => {
+  // read in data
+  d3.csv("data/heavy_precipitation_2.csv",
+    function(d){
+      return { 
+        years : d.years, 
+        inches : d3.format(",.2f")(d.inches)
+      }
+    }).then( 
+      function(data) {
+        // follows same structure as drawPrecipitationChart()
+        const newRects = svg2.selectAll("mybar")
+          .data(data)
+          .enter()
+          .append("rect")
+            .attr("x", function(d) { return x2(d.years); })
+            .attr("width", x2.bandwidth())
+            .attr("height", function() { return 0; })
+            .attr("y", function() { return 1100; })
+            .attr("fill", "#003366")
+            .attr('id', 'lastBars')
+            
+        newRects
+          .transition()
+          .duration(2000)
+          .attr("y", function(d) { return y2(d.inches); })
+          .attr("height", function(d) { return height2 - y2(d.inches); })
+      }
+    )
+}
+
+// function for next button click
+// on first flooding storyline slide
 const firstFloodClick = () => {
     // extend line chart
     chartExtension();
@@ -513,7 +632,8 @@ const firstFloodClick = () => {
 
 }
 
-// function for second click of next button
+// function for next button click
+// on second flood slide
 const secondFloodClick = () => {
   // remove current visualization
   removeLineChart();
@@ -522,7 +642,6 @@ const secondFloodClick = () => {
   drawNewChart();
 
   // change slides (caption)
-
   document.getElementById('next-flood').className = 'hidden';
   document.getElementById('continue-flood').className = 'continue-button';
   document.getElementById('view-prec').className = 'view-button';
@@ -531,6 +650,7 @@ const secondFloodClick = () => {
 }
 
 // function for first click of next button
+// on precipitation storyline slide
 const firstPrecClick = () => {
     // change slides (caption)
     document.getElementById('prec-slide-1').className = 'hidden';
@@ -541,8 +661,12 @@ const firstPrecClick = () => {
     extendPrecipitationChart();
 }
 
+// function for click of the back button
+// on the first precipitation storyline slide
 const firstPrecBackClick = () => {
+  // go back to transition text
   document.getElementById('prec-text').scrollIntoView();
+  // remove bars
   svg2.selectAll('#firstBars')
           .transition()
           .duration(2500)
@@ -550,17 +674,25 @@ const firstPrecBackClick = () => {
           .attr("height", function() { return 0; })
 }
 
+// fucntion for click of the back button
+// on the first flooding storyline slide
 const firstFloodBackClick = () => {
+  // scroll back to transition text
   document.getElementById('flooding-text').scrollIntoView();
+  // remove existing lines
+  pathTransition('#boston', null, true);
+  pathTransition('#national', null, true);
 }
 
+// fucntion for back button click
+// on second precipitation slide
 const secondPrecBackClick = () => {
-
   // change slides (caption)
   document.getElementById('prec-slide-1').className = '';
   document.getElementById('prec-slide-2').className = 'hidden';
   document.getElementById('next').className = 'button';
   document.getElementById('continue').className = 'hidden';
+  // remove second set of bars
   d3.selectAll("#lastBars")
     .transition()
     .duration(2500)
@@ -568,30 +700,22 @@ const secondPrecBackClick = () => {
     .attr("height", function() { return 0; })
 }
 
+// function for back button click
+// on second flooding slide
 const secondFloodBackClick = () => {
-  const bostonPathLength = d3.selectAll('#boston2').node().getTotalLength();
-  d3.selectAll('#boston2')
-    .transition()
-    .delay(200)
-    .ease(d3.easeSin)
-    .duration(2500)
-    .attr("stroke-dasharray", bostonPathLength)
-    .attr("stroke-dashoffset", bostonPathLength);
-
-  const natPathLength = d3.selectAll('#national2').node().getTotalLength();
-  d3.selectAll('#national2')
-    .transition()
-    .delay(200)
-    .ease(d3.easeSin)
-    .duration(2500)
-    .attr("stroke-dasharray", natPathLength)
-    .attr("stroke-dashoffset", natPathLength);
-    // change slides (caption)
-    document.getElementById('flood-slide-2').className = 'hidden';
-    document.getElementById('flood-slide-1').className = '';
+  // remove the second set of lines
+  pathTransition('#boston2', null, true);
+  pathTransition('#national2', null, true);
+  
+  // change slides (caption)
+  document.getElementById('flood-slide-2').className = 'hidden';
+  document.getElementById('flood-slide-1').className = '';
 }
 
+// function for back button click on
+// third flood slide
 const thirdFloodBackClick = resetting => {
+  // show first visualization's axes and labels
   d3.select('#xlabel').classed('hidden', false);
   d3.select('#xaxis').classed('hidden', false);
   d3.select('#ylabel').classed('hidden', false);
@@ -599,40 +723,57 @@ const thirdFloodBackClick = resetting => {
   d3.select('#natCirc').classed('hidden', false);
   d3.select('#natLabel').classed('hidden', false);
   d3.select('#title1').classed('hidden', false);
+
+  // hide second visualization's axes and labels
   d3.selectAll('#futurexaxis').classed('hidden', true);
   d3.selectAll('#futurexlabel').classed('hidden', true);
   d3.selectAll('#futureyaxis').classed('hidden', true);
   d3.selectAll('#futureylabel').classed('hidden', true);
   d3.selectAll('#futuretitle').classed('hidden', true);
+
+  // change buttons and slides
   document.getElementById('continue-flood').className = 'hidden';
   document.getElementById('next-flood').className = 'button';
   document.getElementById('flood-slide-3').className = 'hidden';
+
+  // hide current path
+  pathTransition('#futurePath', null, true);
+
+  // show path from initial visualization
   const firstTransition = d3.transition()
       .delay(2700)
       .ease(d3.easeSin)
       .duration(2500);
   pathTransition('#boston', firstTransition, false);
   pathTransition('#national', firstTransition, false);
-  if (resetting) {
-    d3.selectAll('#futurePath').classed('hidden', true);
-  }
-  else {
+    const secondTransition = d3.transition()
+      .delay(5200)
+      .ease(d3.easeSin)
+      .duration(2500);
+  pathTransition('#boston2', secondTransition, false);
+  pathTransition('#national2', secondTransition, false);
+
+  // if not using function to show first flooding slide
+  // after switching stories, show content from second slide
+  if (!resetting) {
+    document.getElementById('flood-slide-2').className = '';
     const secondTransition = d3.transition()
       .delay(5200)
       .ease(d3.easeSin)
       .duration(2500);
     pathTransition('#boston2', secondTransition, false);
     pathTransition('#national2', secondTransition, false);
-    pathTransition('#futurePath', null, true);
-    document.getElementById('flood-slide-2').className = '';
   }
 }
 
 
 // function to update charts as a result of next button click
 const updateChart = () => {
+  // different functions are called depending on 
+  // which storyline is being told
+  // for each, call functions that correspond to 
+  // current slide and set new slide
   if (precipitation) {
-    // respond to click with appropriate action
     precSlide == 1 && firstPrecClick();
     setPrecSlide(precSlide + 1);
   }
@@ -643,7 +784,10 @@ const updateChart = () => {
   }
 }
 
+// function to update charts and slides in response
+// to back button click
 const goBack = () => {
+  // follows same structure as updateChart()
   if (precipitation) {
     precSlide == 1 && firstPrecBackClick();
     precSlide == 2 && secondPrecBackClick();
@@ -657,74 +801,9 @@ const goBack = () => {
   }
 }
 
+// function to move past the precipitation and flooding
+// visualizations to the future section of the website
 const moveOn = () => {
   document.getElementById('future-transition').scrollIntoView();
 }
-
-
-const drawPrecipitationChart = () => {
-
-  d3.csv("data/heavy_precipitation_1.csv",
-    function(d){
-      return { 
-        years : d.years, 
-        inches : d3.format(",.2f")(d.inches)
-      }
-    }).then( 
-      function(data) {
-        svg2.selectAll("mybar")
-          .data(data)
-          .enter()
-          .append("rect")
-            .attr("x", function(d) { return x2(d.years); })
-            .attr("width", x2.bandwidth())
-            .attr("height", function() { return 0; })
-            .attr("y", function() { return 1100; })
-            .attr("fill", "#003366")
-            .attr('id', 'firstBars')
-            
-            
-        svg2.selectAll('#firstBars')
-          .transition()
-          .delay(100)
-          .duration(2500)
-          .attr("y", function(d) { return y2(d.inches); })
-          .attr("height", function(d) { return height2 - y2(d.inches); })
-      }
-    )
-}
-
-const extendPrecipitationChart = () => {
-  d3.csv("data/heavy_precipitation_2.csv",
-    function(d){
-      return { 
-        years : d.years, 
-        inches : d3.format(",.2f")(d.inches)
-      }
-    }).then( 
-      function(data) {
-        
-        const newRects = svg2.selectAll("mybar")
-          .data(data)
-          .enter()
-          .append("rect")
-            .attr("x", function(d) { return x2(d.years); })
-            .attr("width", x2.bandwidth())
-            .attr("height", function() { return 0; })
-            .attr("y", function() { return 1100; })
-            .attr("fill", "#003366")
-            .attr('id', 'lastBars')
-            
-            
-        newRects
-          .transition()
-          .duration(2000)
-          .attr("y", function(d) { return y2(d.inches); })
-          .attr("height", function(d) { return height2 - y2(d.inches); })
-      }
-    )
-}
-
-// call drawChart() on first render
-//drawChart();
 
