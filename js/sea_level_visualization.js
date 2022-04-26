@@ -181,6 +181,7 @@ const drawFloodChart = () => {
   )
 }
 
+// scrolls to and draws chart 
 const showFuture = () => {
   document.getElementById('future-chart').scrollIntoView();
   drawFloodChart();

@@ -35,7 +35,7 @@
     <div class='title-card'>
       <div class='centered-section'>
         <h1 class='storyboard-h1'>RISING SEA LEVELS</h1>
-        <button class='inverse-button' onClick="document.getElementById('intro-section-1').scrollIntoView();">Begin</button>
+        <button class='big-button inverse-button' onClick="document.getElementById('intro-section-1').scrollIntoView();">Begin</button>
       </div>
     </div>
     <div class='storyboard-section' id='intro-section-1'>
@@ -47,7 +47,7 @@
             <strong >"wreak havoc on coastal cities across the world."</strong>
           </p>
       </div>
-      <button class='button' onclick="document.getElementById('intro-section-2').scrollIntoView();">Next</button>
+      <button class='flow-button' onclick="document.getElementById('intro-section-2').scrollIntoView();">Next</button>
     </div>
     <div class='storyboard-section' id='intro-section-2'>
       <div class='centered-section'>
@@ -62,8 +62,8 @@
             will impact flooding in Seaport.
           </p>
       </div>
-      <button class='back-button' onclick="document.getElementById('intro-section-1').scrollIntoView();">Back</button>
-      <button class='button' onclick="document.getElementById('seaport-vis-1').scrollIntoView();">Next</button>
+      <button class='flow-button back-button' onclick="document.getElementById('intro-section-1').scrollIntoView();">Back</button>
+      <button class='flow-button' onclick="document.getElementById('seaport-vis-1').scrollIntoView();">Next</button>
     </div>
   <div class='storyboard-section' id='seaport-vis-1'>
     <div class='centered-section'>
@@ -72,8 +72,8 @@
         <p>Your browser doesn't support HTML5 video, sorry!</p>
       </video>
     </div>
-    <button class='back-button' onclick="document.getElementById('intro-section-2').scrollIntoView();">Back</button>
-    <button class='button' onclick="document.getElementById('seaport-vis-2').scrollIntoView();">Next</button>
+    <button class='flow-button back-button' onclick="document.getElementById('intro-section-2').scrollIntoView();">Back</button>
+    <button class='flow-button' onclick="document.getElementById('seaport-vis-2').scrollIntoView();">Next</button>
   </div>
   <div class='storyboard-section' id='seaport-vis-2'>
     <div class='centered-section'>
@@ -82,8 +82,8 @@
         <p>Your browser doesn't support HTML5 video, sorry!</p>
       </video>
     </div>
-    <button class='back-button' onclick="document.getElementById('seaport-vis-1').scrollIntoView();">Back</button>
-    <button class='button' onclick="document.getElementById('transition-text').scrollIntoView();">Next</button>
+    <button class='flow-button back-button' onclick="document.getElementById('seaport-vis-1').scrollIntoView();">Back</button>
+    <button class='flow-button' onclick="document.getElementById('transition-text').scrollIntoView();">Next</button>
   </div>
   <div class='storyboard-section' id='transition-text'>
     <div class='centered-section'>
@@ -97,20 +97,20 @@
           climate patterns in Boston.
         </p>
     </div>
-    <button class='back-button' onclick="document.getElementById('seaport-vis-2').scrollIntoView();">Back</button>
-    <button class='button' onclick="document.getElementById('choice-section').scrollIntoView();">Next</button>
+    <button class='flow-button back-button' onclick="document.getElementById('seaport-vis-2').scrollIntoView();">Back</button>
+    <button class='flow-button' onclick="document.getElementById('choice-section').scrollIntoView();">Next</button>
   </div>
     <div class='storyboard-section' id='choice-section'>
       <div class='centered-section'>
         <div>
           <h2 class='storyboard-h2'>Which trend would you like to explore?</h2>
           <div class='button-holder'>
-            <button class='question-button' onClick="switchStory(false)">Flooding</button>
-            <button class='question-button' onClick="switchStory(true)">Precipitation</button>
+            <button class='big-button question-button' onClick="switchStory(false)">Flooding</button>
+            <button class='big-button question-button' onClick="switchStory(true)">Precipitation</button>
           </div>
         </div>
       </div>
-      <button class='back-button' onclick="document.getElementById('transition-text').scrollIntoView();">Back</button>
+      <button class='flow-button back-button' onclick="document.getElementById('transition-text').scrollIntoView();">Back</button>
     </div>
     <div class='hidden' id="prec-text">
       <div class='centered-section'>
@@ -126,13 +126,13 @@
           harm human health, and overwhelm sewer systems. 
         </p>
       </div>
-      <button class='back-button' onclick="document.getElementById('choice-section').scrollIntoView();">Back</button>
-      <button class='button' onclick="showPrecipitation()">Next</button>
+      <button class='flow-button back-button' onclick="document.getElementById('choice-section').scrollIntoView();">Back</button>
+      <button class='flow-button' onclick="showPrecipitation()">Next</button>
     </div>
     <div class='hidden' id='prec-content'>
       <div class="centered-section">
       <div class='vis-section'>
-          <svg id='vis-svg-4' preserveAspectRatio='xMidYMid meet' class='svg-2' viewBox='0 0 1100 1260' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
+          <svg id='vis-svg-4' preserveAspectRatio='xMidYMid meet' class='story-svg' viewBox='0 0 1100 1260' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
           </svg>
         <div class='vis-caption'>
           <div id='prec-slide-1' >
@@ -164,8 +164,8 @@
         </div>
       </div>
     </div>
-      <button class='back-button' id='back' onclick='goBack()'>Back</button>
-      <button class='button' id='next' onclick='updateChart()'>Next</button>
+      <button class='flow-button back-button' id='back' onclick='goBack()'>Back</button>
+      <button class='flow-button' id='next' onclick='updateChart()'>Next</button>
       <button class='hidden' id='view-flooding' onclick='switchStory(false)'>View Flooding</button>
       <button class='hidden' id='continue' onclick='moveOn()'>Continue</button>
     </div>
@@ -183,13 +183,13 @@
             in annual flooding. Studies show this trend is likely to continue.
           </p>
       </div>
-      <button class='back-button' onclick="document.getElementById('choice-section').scrollIntoView();">Back</button>
-      <button class='button' onclick="showFlooding()">Next</button>
+      <button class='flow-button back-button' onclick="document.getElementById('choice-section').scrollIntoView();">Back</button>
+      <button class='flow-button' onclick="showFlooding()">Next</button>
     </div>
     <div class='storyboard-section' id='flooding-content'>
       <div class="centered-section">
       <div class='vis-section'>
-          <svg id='vis-svg-3' preserveAspectRatio='xMidYMid meet' class='svg-2' viewBox='0 0 1100 1260' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
+          <svg id='vis-svg-3' preserveAspectRatio='xMidYMid meet' class='story-svg' viewBox='0 0 1100 1260' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
           </svg>
         <div class='vis-caption'>
           <div id='flood-slide-1' >
@@ -230,8 +230,8 @@
         </div>
       </div>
       </div>
-      <button class='back-button' id='back-flood' onclick='goBack()'>Back</button>
-      <button class='button' id='next-flood' onclick='updateChart()'>Next</button>
+      <button class='flow-button back-button' id='back-flood' onclick='goBack()'>Back</button>
+      <button class='flow-button' id='next-flood' onclick='updateChart()'>Next</button>
       <button class='hidden' id='view-prec' onclick='switchStory(true)'>View Precipitation</button>
       <button class='hidden' id='continue-flood' onclick='moveOn()'>Continue</button>
     </div>
@@ -242,24 +242,24 @@
             Predictions show these extreme weather events will only worsen in years to come.
           </p>
       </div>
-      <button class='back-button' onclick="backToStory()">Back</button>
-      <button class='button' onclick="document.getElementById('future-section').scrollIntoView();">Next</button>
+      <button class='flow-button back-button' onclick="backToStory()">Back</button>
+      <button class='flow-button' onclick="document.getElementById('future-section').scrollIntoView();">Next</button>
     </div>
     <div class='storyboard-section' id='future-section'>
       <div class='centered-section'>
         <div class="centered-text">
           <h2 class='storyboard-h2'>What do you think the future will look like?</h2>
-          <button onclick='showFuture()' class="question-button">Let's see</button>
+          <button onclick='showFuture()' class="big-button">Let's see</button>
         </div>
       </div>
     </div>
     <div class='storyboard-section' id="future-chart">
       <div class='centered-section'>
-          <svg id='vis-svg-5' preserveAspectRatio='xMidYMid meet' class='svg-3' viewBox='0 0 1400 1100' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
+          <svg id='vis-svg-5' preserveAspectRatio='xMidYMid meet' class='future-svg' viewBox='0 0 1400 1100' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
           </svg>
       </div>
-      <button class='back-button' onclick="document.getElementById('future-transition').scrollIntoView();">Back</button>
-      <button class='button' onclick="document.getElementById('future-text').scrollIntoView();">Next</button>
+      <button class='flow-button back-button' onclick="document.getElementById('future-transition').scrollIntoView();">Back</button>
+      <button class='flow-button' onclick="document.getElementById('future-text').scrollIntoView();">Next</button>
     </div>
     <div class='storyboard-section' id="future-text">
       <div class='centered-section'>
@@ -279,7 +279,7 @@
           motivate further research on the effect of rising sea levels in Boston.
         </p>
       </div>
-      <button class='back-button' onclick="document.getElementById('future-chart').scrollIntoView();">Back</button>
+      <button class='flow-button back-button' onclick="document.getElementById('future-chart').scrollIntoView();">Back</button>
     </div>
   </div>
 

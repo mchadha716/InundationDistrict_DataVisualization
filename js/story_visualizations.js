@@ -643,8 +643,8 @@ const secondFloodClick = () => {
 
   // change slides (caption)
   document.getElementById('next-flood').className = 'hidden';
-  document.getElementById('continue-flood').className = 'continue-button';
-  document.getElementById('view-prec').className = 'view-button';
+  document.getElementById('continue-flood').className = 'flow-button continue-button';
+  document.getElementById('view-prec').className = 'flow-button view-button';
   document.getElementById('flood-slide-2').className = 'hidden';
   document.getElementById('flood-slide-3').className = '';
 }
@@ -656,8 +656,8 @@ const firstPrecClick = () => {
     document.getElementById('prec-slide-1').className = 'hidden';
     document.getElementById('prec-slide-2').className = '';
     document.getElementById('next').className = 'hidden';
-    document.getElementById('continue').className = 'continue-button';
-    document.getElementById('view-flooding').className = 'view-button';
+    document.getElementById('continue').className = 'flow-button continue-button';
+    document.getElementById('view-flooding').className = 'flow-button view-button';
     extendPrecipitationChart();
 }
 
@@ -690,7 +690,7 @@ const secondPrecBackClick = () => {
   // change slides (caption)
   document.getElementById('prec-slide-1').className = '';
   document.getElementById('prec-slide-2').className = 'hidden';
-  document.getElementById('next').className = 'button';
+  document.getElementById('next').className = 'flow-button';
   document.getElementById('continue').className = 'hidden';
   // remove second set of bars
   d3.selectAll("#lastBars")
@@ -733,7 +733,7 @@ const thirdFloodBackClick = resetting => {
 
   // change buttons and slides
   document.getElementById('continue-flood').className = 'hidden';
-  document.getElementById('next-flood').className = 'button';
+  document.getElementById('next-flood').className = 'flow-button';
   document.getElementById('flood-slide-3').className = 'hidden';
 
   // hide current path
