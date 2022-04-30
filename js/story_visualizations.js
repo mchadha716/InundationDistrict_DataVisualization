@@ -290,7 +290,8 @@ const pathTransition = (pathId, transition, remove) => {
   const path = d3.selectAll(pathId);
 
   // determine length of path
-  const pathLength = path.node().getTotalLength();
+  // don't try to get path length if path doesn't exist yet
+  const pathLength = path.node() ? path.node().getTotalLength() : null;
 
   // use default or given transition
   const transitionPath = transition || 
