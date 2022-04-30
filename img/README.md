@@ -1,3 +1,3 @@
-# Put any images/screenshots/figures here
+# Images
 
-Use only PNG and/or SVG for screenshots and diagrams as they are lossless or vector graphics, unlike JPG. JPG is ok for photographs.
+ocean_backdrop.jpeg is the photo used as the backdrop for our title page.

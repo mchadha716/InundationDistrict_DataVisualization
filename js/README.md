@@ -1,5 +1,6 @@
-# Put the JavaScript code you write in this folder
+# JavaScript Files
 
-We recommend you separate the implementation details for individual visualizations using the [Reusable Charts](https://bost.ocks.org/mike/chart/) framework Mike Bostock advocates.
-Broadly this means implementing visualizations as closures with getter-setter methods.
-This can be further extended to [making updatable charts](https://www.toptal.com/d3-js/towards-reusable-d3-js-charts).
+sea_level_visualization.js contains the code for the Future Sea Level Rise in Boston D3 visualization. 
+
+story_visualizations.js contains the code for the Past High-Tide Flooding, Future High-Tide Flooding and Heavy Precipitation in the Northeast 
+visualizations. All three visualizations use the same SVG canvas and are hidden/shown using CSS.
