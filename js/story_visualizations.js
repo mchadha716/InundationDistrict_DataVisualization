@@ -1,6 +1,6 @@
 // created some global variables in this file to eliminate code repetition across functions
-// we have multiple functions because of the story-telling aspects of our site, which is 
-// replacing certain elements of interactivity (aproved by Cody)
+// multiple functions so multiple visualizations can be shown on the same SVG canvas using
+// CSS
 
 // boolean variable: is the precipitation storyline being shown?
 let precipitation = false;
